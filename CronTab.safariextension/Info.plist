@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Gowtham</string>
+	<key>Builder Version</key>
+	<string>12602.3.12.0.1</string>
+	<key>CFBundleDisplayName</key>
+	<string>CronTab</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ferryfair.safari.crontab</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.6</string>
+	<key>CFBundleVersion</key>
+	<string>7</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>Global.html</string>
+		<key>Popovers</key>
+		<array>
+			<dict>
+				<key>Filename</key>
+				<string>OrderedTabs.html</string>
+				<key>Identifier</key>
+				<string>OrderedTabs</string>
+				<key>Width</key>
+				<integer>256</integer>
+			</dict>
+		</array>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>RecentTab</string>
+				<key>Identifier</key>
+				<string>MainButton</string>
+				<key>Image</key>
+				<string>CronTab30x30.png</string>
+				<key>Include By Default</key>
+				<true/>
+				<key>Label</key>
+				<string>SwitchToRecentTab</string>
+				<key>Palette Label</key>
+				<string>Switch To Recently Visitied Tabs</string>
+				<key>Popover</key>
+				<string>OrderedTabs</string>
+				<key>Tool Tip</key>
+				<string>Switch To Recently Visitied Tabs</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>Start</key>
+			<array>
+				<string>KeyHandler.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Ctrl + Tab switches to recent Tab</string>
+	<key>DeveloperIdentifier</key>
+	<string>92458GN43Z</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Allowed Domains</key>
+			<array>
+				<string>*</string>
+			</array>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>Some</string>
+		</dict>
+	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://www.ferryfair.com/crontab/UpdateManifest.plist</string>
+	<key>Website</key>
+	<string>http://www.ferryfair.com/crontab/</string>
+</dict>
+</plist>

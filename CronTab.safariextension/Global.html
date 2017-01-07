@@ -1,0 +1,210 @@
+<html>
+    <head>
+        <title>Global</title>
+        <script type="text/javascript">
+            var TabStack=[];
+            var CurrentIndex=0;
+            var PopoverDelay=parseInt(safari.extension.settings.popoverDelay);
+            var easiness = 100;
+            window.init = function(){
+                var CMD   = 8, // bitmask values
+                SHIFT = 4,
+                ALT   = 2,
+                CTRL  = 1;
+                debugger;
+                var TabsButton = safari.extension.toolbarItems[0];
+                var TabsPopOver = TabsButton.popover;
+                var PopDoc= TabsPopOver.contentWindow.document;
+                var TabsDiv= PopDoc.getElementById("Tabs");
+                var RotateTabs=false;
+                function performCommand(event){
+                    if (event.command === "RecentTab") {
+                        if(TabStack.length===0){
+                            addTabsToStack();
+                        }
+                        TabsDiv.children[CurrentIndex].classList.remove('active');
+                        CurrentIndex++;
+                        TabsDiv.children[CurrentIndex].classList.add('active');
+                        ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
+                        window.fInterceptMessage({
+                            name:"ActivateRecent"
+                        });
+                    }
+                }
+                function validateCommand(event){
+                    if (event.command === "reload-page") {
+                        // Disable the button if there is no URL loaded in the tab.
+                        event.target.disabled = !event.target.browserWindow.activeTab.url;
+                    }
+                }
+                function addTabToStack(e){
+                    if (e.target instanceof SafariBrowserTab)
+                    {
+                        if(addTabsToStack())return;
+                        TabStack.push(e.target);
+                        var tabDiv=PopDoc.createElement('div');
+                        tabDiv.className="tab";
+                        if(!e.target.title)
+                            tabDiv.innerText="New tab";
+                        else
+                            tabDiv.innerText=e.target.title.length<=50?e.target.title:(e.target.substr(0,50)+"...");
+                        TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
+                    }
+                }
+                function removeTabFromStack(e){
+                    if (e.target instanceof SafariBrowserTab)
+                    {
+                        for(var i=0;i<TabStack.length;i++){
+                            if(TabStack[i]==e.target){
+                                TabsDiv.removeChild(TabsDiv.children[TabStack.length-i-1]);
+                                TabStack.splice(i,1);
+                                i--;
+                                break;
+                            }
+                        }
+                    }
+                }
+                function bringTabToFront(e){
+                    if (e.target instanceof SafariBrowserTab)
+                    {
+                        if(!TabStack.length){
+                            addTabsToStack();
+                        }
+                        var tabDiv;
+                        for(var i=0;i<TabStack.length;i++){
+                            if(TabStack[i]==e.target){
+                                tabDiv=TabsDiv.removeChild(TabsDiv.children[TabStack.length-i-1]);
+                                TabStack.splice(i,1);
+                                i--;
+                                break;
+                            }
+                        }
+                        if(!tabDiv){
+                            addTabToStack(e);
+                            TabsDiv.children[0].classList.add('active');
+                            ScrollEasyIntoView(TabsDiv.children[0]);
+                        }else{
+                            if(TabsDiv.children.length)
+                                TabsDiv.children[0].classList.remove('active');
+                            tabDiv.classList.add('active');
+                            ScrollEasyIntoView(tabDiv);
+                            TabStack.push(e.target);
+                            TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
+                            if(e.target.title && tabDiv.innerText==='New tab')
+                                tabDiv.innerText=e.target.title.length<=50?e.target.title:(e.target.title.substr(0,47)+"...");
+                        }
+                    }
+                }
+                function addTabsToStack(){
+                    if(!TabStack.length){
+                        for(var i in safari.application.browserWindows){
+                            for(var j in safari.application.browserWindows[i].tabs){
+                                TabStack.push(safari.application.browserWindows[i].tabs[j]);
+                                var tabDiv=PopDoc.createElement('div');
+                                tabDiv.className="tab";
+                                if(!TabStack[TabStack.length-1].title)
+                                    tabDiv.innerText= 'New tab';
+                                else
+                                    tabDiv.innerText=TabStack[TabStack.length-1].title.length<=50?TabStack[TabStack.length-1].title:(TabStack[TabStack.length-1].title.substr(0,47)+"...");
+                                TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
+                            }
+                        }
+                        return true;
+                    }
+                }
+                window.fInterceptMessage=function(e){
+                    if(TabStack.length===0){
+                        addTabsToStack();
+                    }
+                    if(e.name==="RotateTabs"){
+                        RotateTabs=true;
+                        setTimeout(showPopover, window.PopoverDelay);
+                        TabsDiv.children[CurrentIndex].classList.remove('active');
+                        if(e.message.Direction===false){
+                            CurrentIndex++;
+                            CurrentIndex%=TabsDiv.children.length;
+                        }
+                        else{
+                            CurrentIndex--;
+                            if(CurrentIndex<0)CurrentIndex+=TabsDiv.children.length;
+                        }
+                        
+                        TabsDiv.children[CurrentIndex].classList.add('active');
+                        ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
+                    }
+                    else if(e.name==="ActivateRecent"){
+                        RotateTabs=false;
+                        TabsPopOver.hide();
+                        if(CurrentIndex<0){
+                            CurrentIndex = -CurrentIndex;
+                            CurrentIndex %= TabStack.length;
+                        }
+                        else {
+                            CurrentIndex %= TabStack.length;
+                            CurrentIndex = TabStack.length - CurrentIndex-1;
+                        }
+                        var CurrentTab=TabStack[CurrentIndex];
+                        TabStack.splice(CurrentIndex,1);
+                        TabStack.push(CurrentTab);
+                        var tabDiv = TabsDiv.removeChild(TabsDiv.children[TabStack.length-CurrentIndex-1]);
+                        TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
+                        TabStack[TabStack.length-1].browserWindow.activate();
+                        TabStack[TabStack.length-1].activate();
+                        CurrentIndex=0;
+                    }
+                }
+                function setTabNameToQuery(e){
+                    TabsDiv.children[0].innerText=e.query;
+                }
+                function setTabNameToTitle(e){
+                    if(e.target===TabStack[TabStack.length-1]){
+                        if(e.target.title){
+                            TabsDiv.children[0].innerText=e.target.title.length<=50?e.target.title:(e.target.title.substr(0,47)+"...");
+                        } else {
+                            TabsDiv.children[0].innerText='New tab';
+                        }
+                    }
+                }
+                function popoverPopping(e){
+                    if(!TabStack.length){
+                        addTabsToStack();
+                    }
+                }
+                function showPopover(){
+                    if(RotateTabs){
+                        TabsPopOver.contentWindow.modifiers|=ALT;
+                        TabsPopOver.contentWindow.Rotation=true;
+                        TabsButton.showPopover();
+                    }
+                }
+                function PopoverDelayChanged(event) {
+                    if(event.key=="popoverDelay"){
+                        PopoverDelay=parseInt(event.newValue);
+                    }
+                }
+                function ScrollEasyIntoView(elm){
+                    var wndo=TabsPopOver.contentWindow
+                    var elmDispTop = elm.offsetTop - wndo.document.body.scrollTop;
+                    if((elmDispTop+elm.offsetHeight)>wndo.innerHeight){
+                        wndo.document.body.scrollTop= elm.offsetTop - wndo.innerHeight + easiness;
+                    }else if(elmDispTop<0){
+                        wndo.document.body.scrollTop= (elm.offsetTop <= easiness)?0:(elm.offsetTop + easiness);
+                    }
+                }
+                safari.application.addEventListener("command", performCommand, false);
+                safari.application.addEventListener("validate", validateCommand, false);
+                safari.application.addEventListener("open", addTabToStack, true);
+                safari.application.addEventListener("activate", bringTabToFront, true);
+                safari.application.addEventListener("close", removeTabFromStack, true);
+                safari.application.addEventListener("message", fInterceptMessage, false);
+                //safari.application.addEventListener("beforeSearch",setTabNameToQuery, false);
+                safari.application.addEventListener("beforeNavigate",setTabNameToTitle, false);
+                safari.application.addEventListener("navigate",setTabNameToTitle, false);
+                safari.application.addEventListener("popover", popoverPopping, false);
+                safari.extension.settings.addEventListener("change", PopoverDelayChanged, false);
+            };
+        
+        </script>
+    </head>
+    <body onload=""></body>
+</html>
