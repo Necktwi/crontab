@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 56 64 L 56 128 L 72 128 L 72 64 Z" style="stroke-width: 0; stroke: rgb(152, 101, 46); fill: rgb(169, 33, 44);"/>
   <path d="M 0 32 L 128 32 L 128 16 L 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(85, 218, 174);"/>
   <path d="M 0 48 L 128 48 L 128 32 L 0 32 Z" style="stroke: black; stroke-width: 0; fill: rgb(79, 232, 71);"/>
+  <path d="M 56 64 L 56 128 L 72 128 L 72 64 Z" style="stroke-width: 0; stroke: rgb(152, 101, 46); fill: rgb(169, 33, 44);"/>
   <path d="M 32 80 L 96 80 L 96 64 L 32 64 Z" style="stroke: black; stroke-width: 0; fill: rgba(169, 33, 44, 0.909804);"/>
   <path d="M 96 64 L 32 64 L 32 0 L 96 0 L 96 16 L 48 16 L 48 48 L 96 48 Z" style="stroke: black; fill: rgb(32, 42, 113); stroke-width: 0;"/>
 </svg>
