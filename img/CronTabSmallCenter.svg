@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 160 160">
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 160 160">
   <g id="crontab" transform="translate(16 16)">
     <path d="M 0 32 L 128 32 L 128 16 L 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(85, 218, 174);"/>
     <path d="M 0 48 L 128 48 L 128 32 L 0 32 Z" style="stroke: black; stroke-width: 0; fill: rgb(79, 232, 71);"/>
