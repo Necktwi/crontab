@@ -5,6 +5,6 @@
     <path d="M 8 16 l 112 0 a 8 8 0 0 0 0 -16 l -112 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(79, 232, 71);" transform="translate(0 32)"/>
     <path d="M 8 16 l 112 0 a 8 8 0 0 0 0 -16 l -112 0 a 8 8 0 0 0 0 16 Z" style="stroke-width: 0; stroke: rgb(152, 101, 46); fill: rgb(169, 33, 44);" transform="translate(0 92) scale(1 0.5) rotate(90 64 8)"/>
     <path d="M 8 16 l 112 0 a 8 8 0 0 0 0 -16 l -112 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgba(169, 33, 44, 1);" transform="translate(32 64) scale(0.5 1)"/>
-    <path d="M 98 64 l -24 0 a 32 32 0 0 1 0 -64 c 16 0 16 16 -16 16 a 16 16 0 0 0 0 32 l 32 0 a 8 8 0 0 1 0 16 Z" style="stroke: black; fill: rgb(32, 42, 113); stroke-width: 0;"/>
+    <path d="M 98 64 l -24 0 a 32 32 0 0 1 0 -64 c 16 0 16 16 -14 16 a 16 16 0 0 0 0 32 l 32 0 a 8 8 0 0 1 0 16 Z" style="stroke: black; fill: rgb(32, 42, 113); stroke-width: 0;"/>
   </g>
 </svg>
