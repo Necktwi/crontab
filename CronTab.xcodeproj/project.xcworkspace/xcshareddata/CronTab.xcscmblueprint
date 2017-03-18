@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B1B8F9E7A3D7A67DBD4389260BEC785445628F0D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B1B8F9E7A3D7A67DBD4389260BEC785445628F0D" : 9223372036854775807,
+    "D22FE81B8654EB03A0E5E2154BBE05D579EE5428" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A05C1236-1D6C-4D5F-9468-76F7C3E19AEF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B1B8F9E7A3D7A67DBD4389260BEC785445628F0D" : "crontab\/",
+    "D22FE81B8654EB03A0E5E2154BBE05D579EE5428" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CronTab",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CronTab.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/necktwi\/crontab.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1B8F9E7A3D7A67DBD4389260BEC785445628F0D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ferryfair\/www.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D22FE81B8654EB03A0E5E2154BBE05D579EE5428"
+    }
+  ]
+}

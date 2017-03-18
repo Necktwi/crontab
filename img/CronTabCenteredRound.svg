@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 120 138 L 120 246 C 120 251 125 256 130 256 L 130 256 C 133 256 136 251 136 246 L 136 138 C 136 133 131 128 126 128 L 126 128 C 123 128 120 133 120 138 Z" style="stroke-width: 0; stroke: rgb(152, 101, 46); fill: rgb(140, 11, 21);"/>
+  <path d="M 66 32 L 190 32 C 195 32 200 27 200 22 L 200 22 C 200 19 195 16 190 16 L 66 16 C 61 16 56 21 56 26 L 56 26 C 56 29 61 32 66 32 Z" style="stroke: black; stroke-width: 0; fill: indigo;"/>
+  <path d="M 66 48 L 190 48 C 195 48 200 43 200 38 L 200 38 C 200 35 195 32 190 32 L 66 32 C 61 32 56 37 56 42 L 56 42 C 56 45 61 48 66 48 Z" style="stroke: black; stroke-width: 0; fill: blue;"/>
+  <path d="M 66 64 L 190 64 C 195 64 200 59 200 54 L 200 54 C 200 51 195 48 190 48 L 66 48 C 61 48 56 53 56 58 L 56 58 C 56 61 61 64 66 64 Z" style="stroke: black; stroke-width: 0; fill: green;"/>
+  <path d="M 66 80 L 190 80 C 195 80 200 75 200 70 L 200 70 C 200 67 195 64 190 64 L 66 64 C 61 64 56 69 56 74 L 56 74 C 56 77 61 80 66 80 Z" style="stroke: black; stroke-width: 0; fill: yellow;"/>
+  <path d="M 66 96 L 190 96 C 195 96 200 91 200 86 L 200 86 C 200 83 195 80 190 80 L 66 80 C 61 80 56 85 56 90 L 56 90 C 56 93 61 96 66 96 Z" style="stroke: black; stroke-width: 0; fill: orange;"/>
+  <path d="M 66 112 L 190 112 C 195 112 200 107 200 102 L 200 102 C 200 99 195 96 190 96 L 66 96 C 61 96 56 101 56 106 L 56 106 C 56 109 61 112 66 112 Z" style="stroke: black; stroke-width: 0; fill: rgb(218, 85, 114);"/>
+  <path d="M 66 144 L 190 144 C 195 144 200 139 200 134 L 200 134 C 200 131 195 128 190 128 L 66 128 C 61 128 56 133 56 138 L 56 138 C 56 141 61 144 66 144 Z" style="stroke: black; fill: rgb(140, 11, 21); stroke-width: 0;"/>
+  <path d="M 174 128 L 82 128 C 77 128 72 123 72 118 L 72 10 C 72 5 77 0 82 0 L 174 0 C 179 0 184 5 184 10 L 184 10 C 184 13 179 16 174 16 L 100 16 C 95 16 90 21 90 26 L 90 102 C 90 107 95 112 100 112 L 174 112 C 179 112 184 117 184 122 L 184 122 C 184 125 179 128 174 128 Z" style="stroke: black; stroke-width: 0; fill: rgb(31, 121, 121);"/>
+</svg>

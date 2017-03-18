@@ -185,10 +185,11 @@
                 function ScrollEasyIntoView(elm){
                     var wndo=TabsPopOver.contentWindow
                     var elmDispTop = elm.offsetTop - wndo.document.body.scrollTop;
+                    console.log(elmDispTop);
                     if((elmDispTop+elm.offsetHeight)>wndo.innerHeight){
                         wndo.document.body.scrollTop= elm.offsetTop - wndo.innerHeight + easiness;
-                    }else if(elmDispTop<0){
-                        wndo.document.body.scrollTop= (elm.offsetTop <= easiness)?0:(elm.offsetTop + easiness);
+                    }else if(elmDispTop<=0){
+                        wndo.document.body.scrollTop= (elm.offsetTop <= easiness)?0:(elm.offsetTop - easiness+ elm.offsetHeight);
                     }
                 }
                 safari.application.addEventListener("command", performCommand, false);
