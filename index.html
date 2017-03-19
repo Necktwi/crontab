@@ -259,25 +259,19 @@
         <div class="center">you got to click the toolbar button to switch and force click to pop up the list</div>
         <div class="center">restart your browser after installation</div>
         <br/>
-        <table style="margin:auto;padding:10px;">
-            <tr>
-                <td>
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                            <input type="hidden" name="hosted_button_id" value="RY688KEAEZWLJ">
-                                <input type="image" src="PaypalDonate.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!" style="width:61px;">
-                                    </form>
-                </td>
-                <td>
-                    <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fchronologyoftabs&width=51&layout=box_count&action=like&size=small&show_faces=true&share=true&height=65&appId=459566600748940" width="51" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                </td>
-                <td>
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="true" style="position:relative;top:-25px;">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </td>
-            </tr>
-        </table>
+        <div class="center">
+            <div id="fb-root"></div>
+            <script>
+                (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=459566600748940";
+                fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+        </div>
         <br/>
-        <div class="center">you are welcome to submit a patch</div>
         <div class="center">
             <a class="header-logo-invertocat" href="https://github.com/necktwi/crontab" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
                 <svg aria-hidden="true" class="octicon octicon-mark-github" height="28" version="1.1" viewBox="0 0 16 16" width="28"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
