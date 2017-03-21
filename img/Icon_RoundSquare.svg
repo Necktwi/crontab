@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <g id="crontab" transform="translate(16 16)">
+    <path d="M 0 32 L 128 32 L 128 16 L 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(85, 218, 174);"/>
+    <path d="M 0 48 L 128 48 L 128 32 L 0 32 Z" style="stroke: black; stroke-width: 0; fill: rgb(79, 232, 71);"/>
+    <path d="M 56 64 L 56 128 L 72 128 L 72 64 Z" style="stroke-width: 0; stroke: rgb(152, 101, 46); fill: rgb(169, 33, 44);"/>
+    <path d="M 0 80 l 128 0 l 0 -16 l -128 0 Z" style="stroke: black; stroke-width: 0; fill: rgba(169, 33, 44, 0.909804);"/>
+    <path d="M 128 64 l -64 0 a 32 32 0 0 1 0 -64 l 16 16 l -32 0 a 16 16 0 0 0 0 32 l 64 0 Z" style="stroke: black; fill: rgb(32, 42, 113); stroke-width: 0;"/>
+  </g>
+</svg>
+
