@@ -2,90 +2,67 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Author</key>
-	<string>Gowtham</string>
 	<key>Builder Version</key>
 	<string>12602.4.8</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>CronTab</string>
+	<string>CronTab.safariextension</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ferryfair.safari.crontab</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
-	<key>Chrome</key>
-	<dict>
-		<key>Global Page</key>
-		<string>Global.html</string>
-		<key>Popovers</key>
-		<array>
-			<dict>
-				<key>Filename</key>
-				<string>OrderedTabs.html</string>
-				<key>Identifier</key>
-				<string>OrderedTabs</string>
-				<key>Width</key>
-				<integer>256</integer>
-			</dict>
-		</array>
-		<key>Toolbar Items</key>
-		<array>
-			<dict>
-				<key>Command</key>
-				<string>RecentTab</string>
-				<key>Identifier</key>
-				<string>MainButton</string>
-				<key>Image</key>
-				<string>CronTab30x30.png</string>
-				<key>Include By Default</key>
-				<true/>
-				<key>Label</key>
-				<string>SwitchToRecentTab</string>
-				<key>Palette Label</key>
-				<string>Switch To Recently Visitied Tabs</string>
-				<key>Popover</key>
-				<string>OrderedTabs</string>
-				<key>Tool Tip</key>
-				<string>Switch To Recently Visitied Tabs</string>
-			</dict>
-		</array>
-	</dict>
-	<key>Content</key>
-	<dict>
-		<key>Scripts</key>
-		<dict>
-			<key>Start</key>
-			<array>
-				<string>KeyHandler.js</string>
-			</array>
-		</dict>
-	</dict>
-	<key>Description</key>
-	<string>Ctrl + Tab switches to recent Tab</string>
-	<key>DeveloperIdentifier</key>
-	<string>92458GN43Z</string>
+	<string>1</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
-	<key>Permissions</key>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSExtension</key>
 	<dict>
-		<key>Website Access</key>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.Safari.extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
+		<key>SFSafariContentScript</key>
+		<array>
+			<dict>
+				<key>Script</key>
+				<string>script.js</string>
+			</dict>
+		</array>
+		<key>SFSafariToolbarItem</key>
+		<dict>
+			<key>Action</key>
+			<string>Command</string>
+			<key>Identifier</key>
+			<string>Button</string>
+			<key>Image</key>
+			<string>ToolbarItemIcon.pdf</string>
+			<key>Label</key>
+			<string>Your Button</string>
+		</dict>
+		<key>SFSafariWebsiteAccess</key>
 		<dict>
 			<key>Allowed Domains</key>
 			<array>
-				<string>*</string>
+				<string>*.webkit.org</string>
 			</array>
-			<key>Include Secure Pages</key>
-			<true/>
 			<key>Level</key>
 			<string>Some</string>
 		</dict>
 	</dict>
-	<key>Update Manifest URL</key>
-	<string>http://www.ferryfair.com/crontab/UpdateManifest.plist</string>
-	<key>Website</key>
-	<string>http://www.ferryfair.com/crontab/</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2017 FerryFair. All rights reserved.</string>
+	<key>NSHumanReadableDescription</key>
+	<string>This is a Safari Extension. You should tell us what your extension does here.</string>
 </dict>
 </plist>

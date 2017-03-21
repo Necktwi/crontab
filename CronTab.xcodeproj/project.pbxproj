@@ -6,73 +6,696 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		654337281E8128A700B5CDA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654337271E8128A700B5CDA3 /* AppDelegate.swift */; };
+		6543372A1E8128A700B5CDA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654337291E8128A700B5CDA3 /* ViewController.swift */; };
+		6543372C1E8128A700B5CDA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6543372B1E8128A700B5CDA3 /* Assets.xcassets */; };
+		6543372F1E8128A700B5CDA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6543372D1E8128A700B5CDA3 /* Main.storyboard */; };
+		6543373A1E8128A800B5CDA3 /* CronTabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654337391E8128A800B5CDA3 /* CronTabTests.swift */; };
+		654337451E8128A800B5CDA3 /* CronTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654337441E8128A800B5CDA3 /* CronTabUITests.swift */; };
+		654337591E812B4200B5CDA3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654337581E812B4200B5CDA3 /* Cocoa.framework */; };
+		6543375E1E812B4200B5CDA3 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543375D1E812B4200B5CDA3 /* SafariExtensionHandler.swift */; };
+		654337601E812B4200B5CDA3 /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6543375F1E812B4200B5CDA3 /* SafariExtensionViewController.swift */; };
+		654337631E812B4200B5CDA3 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654337611E812B4200B5CDA3 /* SafariExtensionViewController.xib */; };
+		654337661E812B4200B5CDA3 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 654337651E812B4200B5CDA3 /* script.js */; };
+		654337681E812B4200B5CDA3 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 654337671E812B4200B5CDA3 /* ToolbarItemIcon.pdf */; };
+		6543376B1E812B4200B5CDA3 /* CronTab.safariextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 654337561E812B4200B5CDA3 /* CronTab.safariextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		654337361E8128A800B5CDA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6543371C1E8128A700B5CDA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 654337231E8128A700B5CDA3;
+			remoteInfo = CronTab;
+		};
+		654337411E8128A800B5CDA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6543371C1E8128A700B5CDA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 654337231E8128A700B5CDA3;
+			remoteInfo = CronTab;
+		};
+		654337691E812B4200B5CDA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6543371C1E8128A700B5CDA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 654337551E812B4200B5CDA3;
+			remoteInfo = CronTab.safariextension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6543376F1E812B4200B5CDA3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6543376B1E812B4200B5CDA3 /* CronTab.safariextension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		65431D141E7BE9EF008E17DF /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; path = img; sourceTree = "<group>"; };
-		65431D151E7BE9EF008E17DF /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		65431D161E7BE9EF008E17DF /* PaypalDonate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PaypalDonate.png; sourceTree = "<group>"; };
-		65431D171E7BE9EF008E17DF /* PaypalDonate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = PaypalDonate.gif; sourceTree = "<group>"; };
+		654337241E8128A700B5CDA3 /* CronTab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CronTab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		654337271E8128A700B5CDA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		654337291E8128A700B5CDA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6543372B1E8128A700B5CDA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6543372E1E8128A700B5CDA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		654337301E8128A700B5CDA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654337351E8128A800B5CDA3 /* CronTabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CronTabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		654337391E8128A800B5CDA3 /* CronTabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronTabTests.swift; sourceTree = "<group>"; };
+		6543373B1E8128A800B5CDA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654337401E8128A800B5CDA3 /* CronTabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CronTabUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		654337441E8128A800B5CDA3 /* CronTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronTabUITests.swift; sourceTree = "<group>"; };
+		654337461E8128A800B5CDA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654337561E812B4200B5CDA3 /* CronTab.safariextension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CronTab.safariextension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		654337581E812B4200B5CDA3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		6543375C1E812B4200B5CDA3 /* CronTab_safariextension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CronTab_safariextension.entitlements; sourceTree = "<group>"; };
+		6543375D1E812B4200B5CDA3 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		6543375F1E812B4200B5CDA3 /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
+		654337621E812B4200B5CDA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
+		654337641E812B4200B5CDA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654337651E812B4200B5CDA3 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		654337671E812B4200B5CDA3 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		654337211E8128A700B5CDA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654337321E8128A800B5CDA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6543373D1E8128A800B5CDA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654337531E812B4200B5CDA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654337591E812B4200B5CDA3 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		65431D0D1E7BE971008E17DF = {
+		6543371B1E8128A700B5CDA3 = {
 			isa = PBXGroup;
 			children = (
-				65431D141E7BE9EF008E17DF /* img */,
-				65431D151E7BE9EF008E17DF /* index.html */,
-				65431D161E7BE9EF008E17DF /* PaypalDonate.png */,
-				65431D171E7BE9EF008E17DF /* PaypalDonate.gif */,
+				654337261E8128A700B5CDA3 /* CronTab */,
+				654337381E8128A800B5CDA3 /* CronTabTests */,
+				654337431E8128A800B5CDA3 /* CronTabUITests */,
+				6543375A1E812B4200B5CDA3 /* CronTab.safariextension */,
+				654337571E812B4200B5CDA3 /* Frameworks */,
+				654337251E8128A700B5CDA3 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		654337251E8128A700B5CDA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				654337241E8128A700B5CDA3 /* CronTab.app */,
+				654337351E8128A800B5CDA3 /* CronTabTests.xctest */,
+				654337401E8128A800B5CDA3 /* CronTabUITests.xctest */,
+				654337561E812B4200B5CDA3 /* CronTab.safariextension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		654337261E8128A700B5CDA3 /* CronTab */ = {
+			isa = PBXGroup;
+			children = (
+				654337271E8128A700B5CDA3 /* AppDelegate.swift */,
+				654337291E8128A700B5CDA3 /* ViewController.swift */,
+				6543372B1E8128A700B5CDA3 /* Assets.xcassets */,
+				6543372D1E8128A700B5CDA3 /* Main.storyboard */,
+				654337301E8128A700B5CDA3 /* Info.plist */,
+			);
+			path = CronTab;
+			sourceTree = "<group>";
+		};
+		654337381E8128A800B5CDA3 /* CronTabTests */ = {
+			isa = PBXGroup;
+			children = (
+				654337391E8128A800B5CDA3 /* CronTabTests.swift */,
+				6543373B1E8128A800B5CDA3 /* Info.plist */,
+			);
+			path = CronTabTests;
+			sourceTree = "<group>";
+		};
+		654337431E8128A800B5CDA3 /* CronTabUITests */ = {
+			isa = PBXGroup;
+			children = (
+				654337441E8128A800B5CDA3 /* CronTabUITests.swift */,
+				654337461E8128A800B5CDA3 /* Info.plist */,
+			);
+			path = CronTabUITests;
+			sourceTree = "<group>";
+		};
+		654337571E812B4200B5CDA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				654337581E812B4200B5CDA3 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6543375A1E812B4200B5CDA3 /* CronTab.safariextension */ = {
+			isa = PBXGroup;
+			children = (
+				6543375D1E812B4200B5CDA3 /* SafariExtensionHandler.swift */,
+				6543375F1E812B4200B5CDA3 /* SafariExtensionViewController.swift */,
+				654337611E812B4200B5CDA3 /* SafariExtensionViewController.xib */,
+				654337641E812B4200B5CDA3 /* Info.plist */,
+				654337651E812B4200B5CDA3 /* script.js */,
+				654337671E812B4200B5CDA3 /* ToolbarItemIcon.pdf */,
+				6543375B1E812B4200B5CDA3 /* Supporting Files */,
+			);
+			path = CronTab.safariextension;
+			sourceTree = "<group>";
+		};
+		6543375B1E812B4200B5CDA3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6543375C1E812B4200B5CDA3 /* CronTab_safariextension.entitlements */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXNativeTarget section */
+		654337231E8128A700B5CDA3 /* CronTab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 654337491E8128A800B5CDA3 /* Build configuration list for PBXNativeTarget "CronTab" */;
+			buildPhases = (
+				654337201E8128A700B5CDA3 /* Sources */,
+				654337211E8128A700B5CDA3 /* Frameworks */,
+				654337221E8128A700B5CDA3 /* Resources */,
+				6543376F1E812B4200B5CDA3 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6543376A1E812B4200B5CDA3 /* PBXTargetDependency */,
+			);
+			name = CronTab;
+			productName = CronTab;
+			productReference = 654337241E8128A700B5CDA3 /* CronTab.app */;
+			productType = "com.apple.product-type.application";
+		};
+		654337341E8128A800B5CDA3 /* CronTabTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6543374C1E8128A800B5CDA3 /* Build configuration list for PBXNativeTarget "CronTabTests" */;
+			buildPhases = (
+				654337311E8128A800B5CDA3 /* Sources */,
+				654337321E8128A800B5CDA3 /* Frameworks */,
+				654337331E8128A800B5CDA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				654337371E8128A800B5CDA3 /* PBXTargetDependency */,
+			);
+			name = CronTabTests;
+			productName = CronTabTests;
+			productReference = 654337351E8128A800B5CDA3 /* CronTabTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6543373F1E8128A800B5CDA3 /* CronTabUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6543374F1E8128A800B5CDA3 /* Build configuration list for PBXNativeTarget "CronTabUITests" */;
+			buildPhases = (
+				6543373C1E8128A800B5CDA3 /* Sources */,
+				6543373D1E8128A800B5CDA3 /* Frameworks */,
+				6543373E1E8128A800B5CDA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				654337421E8128A800B5CDA3 /* PBXTargetDependency */,
+			);
+			name = CronTabUITests;
+			productName = CronTabUITests;
+			productReference = 654337401E8128A800B5CDA3 /* CronTabUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		654337551E812B4200B5CDA3 /* CronTab.safariextension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6543376C1E812B4200B5CDA3 /* Build configuration list for PBXNativeTarget "CronTab.safariextension" */;
+			buildPhases = (
+				654337521E812B4200B5CDA3 /* Sources */,
+				654337531E812B4200B5CDA3 /* Frameworks */,
+				654337541E812B4200B5CDA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CronTab.safariextension;
+			productName = CronTab.safariextension;
+			productReference = 654337561E812B4200B5CDA3 /* CronTab.safariextension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
 /* Begin PBXProject section */
-		65431D0E1E7BE971008E17DF /* Project object */ = {
+		6543371C1E8128A700B5CDA3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = FerryFair;
+				TargetAttributes = {
+					654337231E8128A700B5CDA3 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 92458GN43Z;
+						ProvisioningStyle = Automatic;
+					};
+					654337341E8128A800B5CDA3 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 92458GN43Z;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 654337231E8128A700B5CDA3;
+					};
+					6543373F1E8128A800B5CDA3 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 92458GN43Z;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 654337231E8128A700B5CDA3;
+					};
+					654337551E812B4200B5CDA3 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 92458GN43Z;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
-			buildConfigurationList = 65431D111E7BE971008E17DF /* Build configuration list for PBXProject "CronTab" */;
+			buildConfigurationList = 6543371F1E8128A700B5CDA3 /* Build configuration list for PBXProject "CronTab" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 65431D0D1E7BE971008E17DF;
+			mainGroup = 6543371B1E8128A700B5CDA3;
+			productRefGroup = 654337251E8128A700B5CDA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				654337231E8128A700B5CDA3 /* CronTab */,
+				654337341E8128A800B5CDA3 /* CronTabTests */,
+				6543373F1E8128A800B5CDA3 /* CronTabUITests */,
+				654337551E812B4200B5CDA3 /* CronTab.safariextension */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		654337221E8128A700B5CDA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6543372C1E8128A700B5CDA3 /* Assets.xcassets in Resources */,
+				6543372F1E8128A700B5CDA3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654337331E8128A800B5CDA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6543373E1E8128A800B5CDA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654337541E812B4200B5CDA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654337681E812B4200B5CDA3 /* ToolbarItemIcon.pdf in Resources */,
+				654337631E812B4200B5CDA3 /* SafariExtensionViewController.xib in Resources */,
+				654337661E812B4200B5CDA3 /* script.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		654337201E8128A700B5CDA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6543372A1E8128A700B5CDA3 /* ViewController.swift in Sources */,
+				654337281E8128A700B5CDA3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654337311E8128A800B5CDA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6543373A1E8128A800B5CDA3 /* CronTabTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6543373C1E8128A800B5CDA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654337451E8128A800B5CDA3 /* CronTabUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654337521E812B4200B5CDA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654337601E812B4200B5CDA3 /* SafariExtensionViewController.swift in Sources */,
+				6543375E1E812B4200B5CDA3 /* SafariExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		654337371E8128A800B5CDA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 654337231E8128A700B5CDA3 /* CronTab */;
+			targetProxy = 654337361E8128A800B5CDA3 /* PBXContainerItemProxy */;
+		};
+		654337421E8128A800B5CDA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 654337231E8128A700B5CDA3 /* CronTab */;
+			targetProxy = 654337411E8128A800B5CDA3 /* PBXContainerItemProxy */;
+		};
+		6543376A1E812B4200B5CDA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 654337551E812B4200B5CDA3 /* CronTab.safariextension */;
+			targetProxy = 654337691E812B4200B5CDA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6543372D1E8128A700B5CDA3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6543372E1E8128A700B5CDA3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		654337611E812B4200B5CDA3 /* SafariExtensionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				654337621E812B4200B5CDA3 /* Base */,
+			);
+			name = SafariExtensionViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		65431D121E7BE971008E17DF /* Debug */ = {
+		654337471E8128A800B5CDA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		65431D131E7BE971008E17DF /* Release */ = {
+		654337481E8128A800B5CDA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		6543374A1E8128A800B5CDA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTab/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FerryFair.CronTab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		6543374B1E8128A800B5CDA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTab/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FerryFair.CronTab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		6543374D1E8128A800B5CDA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTabTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FerryFair.CronTabTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CronTab.app/Contents/MacOS/CronTab";
+			};
+			name = Debug;
+		};
+		6543374E1E8128A800B5CDA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTabTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FerryFair.CronTabTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CronTab.app/Contents/MacOS/CronTab";
+			};
+			name = Release;
+		};
+		654337501E8128A800B5CDA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTabUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FerryFair.CronTabUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = CronTab;
+			};
+			name = Debug;
+		};
+		654337511E8128A800B5CDA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTabUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = FerryFair.CronTabUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = CronTab;
+			};
+			name = Release;
+		};
+		6543376D1E812B4200B5CDA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CronTab.safariextension/CronTab_safariextension.entitlements;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTab.safariextension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "FerryFair.CronTab.CronTab-safariextension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		6543376E1E812B4200B5CDA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CronTab.safariextension/CronTab_safariextension.entitlements;
+				DEVELOPMENT_TEAM = 92458GN43Z;
+				INFOPLIST_FILE = CronTab.safariextension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "FerryFair.CronTab.CronTab-safariextension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		65431D111E7BE971008E17DF /* Build configuration list for PBXProject "CronTab" */ = {
+		6543371F1E8128A700B5CDA3 /* Build configuration list for PBXProject "CronTab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65431D121E7BE971008E17DF /* Debug */,
-				65431D131E7BE971008E17DF /* Release */,
+				654337471E8128A800B5CDA3 /* Debug */,
+				654337481E8128A800B5CDA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		654337491E8128A800B5CDA3 /* Build configuration list for PBXNativeTarget "CronTab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6543374A1E8128A800B5CDA3 /* Debug */,
+				6543374B1E8128A800B5CDA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6543374C1E8128A800B5CDA3 /* Build configuration list for PBXNativeTarget "CronTabTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6543374D1E8128A800B5CDA3 /* Debug */,
+				6543374E1E8128A800B5CDA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6543374F1E8128A800B5CDA3 /* Build configuration list for PBXNativeTarget "CronTabUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				654337501E8128A800B5CDA3 /* Debug */,
+				654337511E8128A800B5CDA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6543376C1E812B4200B5CDA3 /* Build configuration list for PBXNativeTarget "CronTab.safariextension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6543376D1E812B4200B5CDA3 /* Debug */,
+				6543376E1E812B4200B5CDA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 65431D0E1E7BE971008E17DF /* Project object */;
+	rootObject = 6543371C1E8128A700B5CDA3 /* Project object */;
 }
