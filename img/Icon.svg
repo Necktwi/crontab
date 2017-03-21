@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-  <g id="crontab" transform="translate(16 16)">
-    <path d="M 8 16 l 112 0 a 8 8 0 0 0 0 -16 l -112 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(35, 236, 169);" transform="translate(0 32)"/>
-    <path d="M 8 16 l 112 0 a 8 8 0 0 0 0 -16 l -112 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(28, 153, 255);" transform="translate(0 48)"/>
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <g id="crontab" transform="">
+    <path d="M 16 16 l 96 0 a 8 8 0 0 0 0 -16 l -96 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(35, 236, 169);" transform="translate(0 32)"/>
+    <path d="M 16 16 l 96 0 a 8 8 0 0 0 0 -16 l -96 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgb(28, 153, 255);" transform="translate(0 48)"/>
     <path d="M 0 0 l 16 0 0 16 -16 0 Z" style="stroke-width: 0; stroke: rgb(152, 101, 46); fill: rgb(169, 33, 44);" transform="translate(56 96)"/>
-    <path d="M 8 16 l 112 0 a 8 8 0 0 0 0 -16 l -112 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgba(169, 33, 44, 1);" transform="translate(0 80)"/>
+    <path d="M 16 16 l 96 0 a 8 8 0 0 0 0 -16 l -96 0 a 8 8 0 0 0 0 16 Z" style="stroke: black; stroke-width: 0; fill: rgba(169, 33, 44, 1);" transform="translate(0 80)"/>
     <path d="M 98 64 l -24 0 a 32 32 0 0 1 0 -64 c 8 0 32 16 8 16 l -23 0 a 16 16 0 0 0 0 32 l 32 0 c 8 0 32 16 8 16 Z" style="stroke: black; fill: rgb(32, 42, 113); stroke-width: 0;" transform="translate(0 16)"/>
   </g>
 </svg>
