@@ -14,6 +14,7 @@
                 CTRL  = 1;
                 debugger;
                 var TabsButton = safari.extension.toolbarItems[0];
+                if(!TabsButton)return -1;
                 var TabsPopOver = TabsButton.popover;
                 var PopDoc= TabsPopOver.contentWindow.document;
                 var TabsDiv= PopDoc.getElementById("Tabs");
@@ -212,6 +213,7 @@
                 safari.application.addEventListener("navigate",setTabNameToTitle, false);
                 safari.application.addEventListener("popover", popoverPopping, false);
                 safari.extension.settings.addEventListener("change", PopoverDelayChanged, false);
+                window.initialized=true;
             };
         
         </script>

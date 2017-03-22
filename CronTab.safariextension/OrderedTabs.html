@@ -11,12 +11,16 @@
                 CTRL  = 1;
                 window.Rotation = false;
                 var gWindow=safari.extension.globalPage.contentWindow;
-                if(!gWindow.init){
-                    setTimeOut(init,1000);
+                if(!gWindow || !gWindow.init){
+                    setTimeout(init,1000);
                     return;
                 }
-                gWindow.init();
-                gWindow.console.log("new window opened");
+                if(!gWindow.initialized){
+                    if(gWindow.init()==-1){
+                        setTimeout(init,1000);
+                        return;
+                    }
+                }
                 var tabsDiv = document.getElementById('Tabs');
                 function modifierCode(event) {
                     switch (event.keyCode) {
