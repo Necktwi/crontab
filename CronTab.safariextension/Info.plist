@@ -86,6 +86,6 @@
 	<key>Update Manifest URL</key>
 	<string>http://www.ferryfair.com/crontab/UpdateManifest.plist</string>
 	<key>Website</key>
-	<string>http://www.ferryfair.com/crontab/</string>
+	<string>http://ferryfair.com/crontab</string>
 </dict>
 </plist>

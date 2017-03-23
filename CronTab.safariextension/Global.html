@@ -95,7 +95,7 @@
                             ScrollEasyIntoView(tabDiv);
                             TabStack.push(e.target);
                             TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
-                            if(e.target.title && tabDiv.innerText==='New tab')
+                            if(e.target.title && (tabDiv.innerText==='New tab' || tabDiv.innerText==='Untitled'))
                                 tabDiv.innerText=e.target.title.length<=titleLen?e.target.title:(e.target.title.substr(0,titleLen - 3)+"...");
                         }
                     }
