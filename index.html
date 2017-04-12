@@ -37,7 +37,7 @@
              *  limitations under the License.                                            *
              *                                                                            *
              *****************************************************************************/
-        
+
         /**
          * SVG Path rounding function. Takes an input path string and outputs a path
          * string where all line-line corners have been rounded. Only supports absolute
@@ -56,9 +56,9 @@
             function moveTowardsLength(movingPoint, targetPoint, amount) {
                 var width = (targetPoint.x - movingPoint.x);
                 var height = (targetPoint.y - movingPoint.y);
-                
+
                 var distance = Math.sqrt(width*width + height*height);
-                
+
                 return moveTowardsFractional(movingPoint, targetPoint, Math.min(1, amount / distance));
             }
             function moveTowardsFractional(movingPoint, targetPoint, fraction) {
@@ -67,7 +67,7 @@
                     y: movingPoint.y + (targetPoint.y - movingPoint.y)*fraction
                 };
             }
-            
+
             // Adjusts the ending position of a command
             function adjustCommand(cmd, newPoint) {
                 if (cmd.length > 2) {
@@ -75,7 +75,7 @@
                     cmd[cmd.length - 1] = newPoint.y;
                 }
             }
-            
+
             // Gives an {x, y} object for a command's ending position
             function pointForCommand(cmd) {
                 return {
@@ -83,7 +83,7 @@
                     y: parseFloat(cmd[cmd.length - 1]),
                 };
             }
-            
+
             // Split apart the path, handing concatonated letters and numbers
             var pathParts = pathString
             .split(/[,\s]/)
@@ -95,10 +95,10 @@
                 } else {
                     parts.push(part);
                 }
-                
+
                 return parts;
             }, []);
-            
+
             // Group the commands with their arguments for easier handling
             var commands = pathParts.reduce(function(commands, part) {
                 if (parseFloat(part) == part && commands.length) {
@@ -106,46 +106,46 @@
                 } else {
                     commands.push([part]);
                 }
-                
+
                 return commands;
             }, []);
-            
+
             // The resulting commands, also grouped
             var resultCommands = [];
-            
+
             if (commands.length > 1) {
                 var startPoint = pointForCommand(commands[0]);
-                
+
                 // Handle the close path case with a "virtual" closing line
                 var virtualCloseLine = null;
                 if (commands[commands.length - 1][0] == "Z" && commands[0].length > 2) {
                     virtualCloseLine = ["L", startPoint.x, startPoint.y];
                     commands[commands.length - 1] = virtualCloseLine;
                 }
-                
+
                 // We always use the first command (but it may be mutated)
                 resultCommands.push(commands[0]);
-                
+
                 for (var cmdIndex=1; cmdIndex < commands.length; cmdIndex++) {
                     var prevCmd = resultCommands[resultCommands.length - 1];
-                    
+
                     var curCmd = commands[cmdIndex];
-                    
+
                     // Handle closing case
                     var nextCmd = (curCmd == virtualCloseLine)
                     ? commands[1]
                     : commands[cmdIndex + 1];
-                    
+
                     // Nasty logic to decide if this path is a candidite.
                     if (nextCmd && prevCmd && (prevCmd.length > 2) && curCmd[0] == "L" && nextCmd.length > 2 && nextCmd[0] == "L") {
                         // Calc the points we're dealing with
                         var prevPoint = pointForCommand(prevCmd);
                         var curPoint = pointForCommand(curCmd);
                         var nextPoint = pointForCommand(nextCmd);
-                        
+
                         // The start and end of the cuve are just our point moved towards the previous and next points, respectivly
                         var curveStart, curveEnd;
-                        
+
                         if (useFractionalRadius) {
                             curveStart = moveTowardsFractional(curPoint, prevCmd.origPoint || prevPoint, radius);
                             curveEnd = moveTowardsFractional(curPoint, nextCmd.origPoint || nextPoint, radius);
@@ -153,18 +153,18 @@
                             curveStart = moveTowardsLength(curPoint, prevPoint, radius);
                             curveEnd = moveTowardsLength(curPoint, nextPoint, radius);
                         }
-                        
+
                         // Adjust the current command and add it
                         adjustCommand(curCmd, curveStart);
                         curCmd.origPoint = curPoint;
                         resultCommands.push(curCmd);
-                        
+
                         // The curve control points are halfway between the start/end of the curve and
                         // the original point
                         var startControl = moveTowardsFractional(curveStart, curPoint, .5);
                         var endControl = moveTowardsFractional(curPoint, curveEnd, .5);
-                        
-                        // Create the curve 
+
+                        // Create the curve
                         var curveCmd = ["C", startControl.x, startControl.y, endControl.x, endControl.y, curveEnd.x, curveEnd.y];
                         // Save the original point for fractional calculations
                         curveCmd.origPoint = curPoint;
@@ -174,7 +174,7 @@
                         resultCommands.push(curCmd);
                     }
                 }
-                
+
                 // Fix up the starting point and restore the close path if the path was orignally closed
                 if (virtualCloseLine) {
                     var newStartPoint = pointForCommand(resultCommands[resultCommands.length-1]);
@@ -184,7 +184,7 @@
             } else {
                 resultCommands = commands;
             }
-            
+
             return resultCommands.reduce(function(str, c){ return str + c.join(" ") + " "; }, "");
         }
     </script>
@@ -227,7 +227,7 @@
             border:0px;
             vertical-align:middle;
         }
-    
+
     </style>
     <script type="text/javascript">
         var init = function(){
@@ -239,7 +239,7 @@
             }
         }
     </script>
-    
+
 </head>
 <body onload="">
     <div class="wrapper">
@@ -267,17 +267,16 @@
         </div>
         </br>
         <div class="center">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1301679816548560";
-                fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-            </script>
-            <div class="fb-like" data-href="http://ferryfair.com/crontab" data-width="64" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false">
-            </div>
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1301679816548560";
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+          </script>
+          <div class="fb-like" data-href="https://www.facebook.com/tabschronology/" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
         </div>
         <br/>
         <div class="push"></div>
