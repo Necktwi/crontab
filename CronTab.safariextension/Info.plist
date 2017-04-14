@@ -39,7 +39,7 @@
 				<key>Identifier</key>
 				<string>MainButton</string>
 				<key>Image</key>
-				<string>CronTab64x64.png</string>
+				<string>CronTab17x17.png</string>
 				<key>Include By Default</key>
 				<true/>
 				<key>Label</key>
