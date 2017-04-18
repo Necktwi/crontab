@@ -14,5 +14,25 @@
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>bright</string>
+		<key>Key</key>
+		<string>skin</string>
+		<key>Title</key>
+		<string>Skin</string>
+		<key>Titles</key>
+		<array>
+			<string>Default</string>
+			<string>Bright</string>
+		</array>
+		<key>Type</key>
+		<string>ListBox</string>
+		<key>Values</key>
+		<array>
+			<string>default</string>
+			<string>bright</string>
+		</array>
+	</dict>
 </array>
 </plist>

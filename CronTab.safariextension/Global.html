@@ -5,8 +5,10 @@
             var TabStack=[];
             var CurrentIndex=0;
             var PopoverDelay=parseInt(safari.extension.settings.popoverDelay);
+            var Skin=parseInt(safari.extension.settings.skin)
             var easiness = 100;
             var titleLen = 70;
+            var TabsDiv;
             window.init = function(){
                 var CMD   = 8, // bitmask values
                 SHIFT = 4,
@@ -17,7 +19,7 @@
                 if(!TabsButton)return -1;
                 var TabsPopOver = TabsButton.popover;
                 var PopDoc= TabsPopOver.contentWindow.document;
-                var TabsDiv= PopDoc.getElementById("Tabs");
+                TabsDiv= PopDoc.getElementById("Tabs");
                 var RotateTabs=false;
                 function performCommand(event){
                     if (event.command === "RecentTab") {
@@ -133,7 +135,7 @@
                             CurrentIndex--;
                             if(CurrentIndex<0)CurrentIndex+=TabsDiv.children.length;
                         }
-                        
+
                         TabsDiv.children[CurrentIndex].classList.add('active');
                         ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
                     }
@@ -174,6 +176,11 @@
                     if(!TabStack.length){
                         addTabsToStack();
                     }
+                    var activeTabs = TabsDiv.getElementsByClassName('active');
+                    for(var i=1;i<activeTabs.length;i++){
+                      activeTabs[i].classList.remove('active');
+                      --i;
+                    }
                 }
                 function showPopover(){
                     if(RotateTabs){
@@ -188,9 +195,22 @@
                         safari.application.activeBrowserWindow.cronTabButton.showPopover();
                     }
                 }
-                function PopoverDelayChanged(event) {
+                function PreferenceChanged(event) {
                     if(event.key=="popoverDelay"){
-                        PopoverDelay=parseInt(event.newValue);
+                      PopoverDelay=parseInt(event.newValue);
+                    }else if(event.key=="skin"){
+                      var skins = TabsDiv.classList;
+                      console.log(skins);
+                      for (var i=0; i<skins.length; i++){
+                        var skin=skins[i];
+                        console.log(skin);
+                        if(/.+Skin$/.test(skin)){
+                          skins.remove(skin);
+                          --i;
+                        }
+                      }
+                      Skin = event.newValue;
+                      TabsDiv.classList.add(Skin+"Skin");
                     }
                 }
                 function ScrollEasyIntoView(elm){
@@ -212,10 +232,10 @@
                 safari.application.addEventListener("beforeNavigate",setTabNameToTitle, false);
                 safari.application.addEventListener("navigate",setTabNameToTitle, false);
                 safari.application.addEventListener("popover", popoverPopping, false);
-                safari.extension.settings.addEventListener("change", PopoverDelayChanged, false);
+                safari.extension.settings.addEventListener("change", PreferenceChanged, false);
                 window.initialized=true;
             };
-        
+
         </script>
     </head>
     <body onload=""></body>

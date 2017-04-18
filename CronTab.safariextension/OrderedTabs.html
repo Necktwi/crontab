@@ -1,123 +1,164 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>OrderedTabs</title>
-        <script type="text/javascript">
-            var modifiers;
-            window.init=function(){
-                var CMD   = 8, // bitmask values
-                SHIFT = 4,
-                ALT   = 2,
-                CTRL  = 1;
-                window.Rotation = false;
-                var gWindow=safari.extension.globalPage.contentWindow;
-                if(!gWindow || !gWindow.init){
-                    setTimeout(init,1000);
-                    return;
-                }
-                if(!gWindow.initialized){
-                    if(gWindow.init()==-1){
-                        setTimeout(init,1000);
-                        return;
-                    }
-                }
-                var tabsDiv = document.getElementById('Tabs');
-                function modifierCode(event) {
-                    switch (event.keyCode) {
-                        case 91:
-                        case 93:
-                        return CMD;
-                        case 16:
-                        return SHIFT;
-                        case 18:
-                        return ALT;
-                        case 17:
-                        return CTRL;
-                        default:
-                        return 0;
-                    }
-                }
-                
-                window.addEventListener('keydown', function(event) {
-                    var modifier = modifierCode(event);
-                    if (modifier !== 0) {
-                        modifiers = modifiers | modifier; // add to the bitmask "stack"
-                    } else {
-                        if((modifiers&ALT)===ALT || (modifiers&(ALT|SHIFT))===(ALT|SHIFT)){
-                            if (event.keyIdentifier === 'U+0009') {
-                                Rotation=true;
-                                if((modifiers&(ALT|SHIFT))===(ALT|SHIFT)){
-                                    gWindow.fInterceptMessage({
-                                        name:"RotateTabs",
-                                        message:{Direction:true,Modifiers:modifiers}
-                                        });
-                                }
-                                else if((modifiers&ALT)===ALT ){
-                                    gWindow.fInterceptMessage({
-                                        name:"RotateTabs",
-                                        message:{Direction:false,Modifiers:modifiers}
-                                        });
-                                }
-                                // for testing
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                        }
-                    }
-                }, true);
-                
-                window.addEventListener('keyup', function(event) {
-                    modifiers = modifiers & ~modifierCode(event); // remove from the stack
-                    if(event.keyCode===18 &&Rotation){
-                        Rotation=false;
-                        gWindow.fInterceptMessage({
-                            name:"ActivateRecent",
-                            message:{Direction:false,Modifiers:modifiers}
-                            });
-                    }
-                },true);
-                
-                window.ActivateTab = function(e){
-                    if(event.target.classList.contains('tab')){
-                        for(var i in tabsDiv.children){
-                            if(tabsDiv.children[i]===event.target)break;
-                        }
-                        tabsDiv.children[gWindow.CurrentIndex].classList.remove('active');
-                        gWindow.CurrentIndex=i;
-                        tabsDiv.children[i].classList.add("active");
-                        gWindow.fInterceptMessage({
-                            name:"ActivateRecent",
-                            message:{Direction:false,Modifiers:modifiers}
-                            });
-                    }
-                }
-                
-            };
-        </script>
-        <style type="text/css">
-            body,html {
-                margin:1px;
+
+<head>
+  <title>OrderedTabs</title>
+  <script type="text/javascript">
+    var modifiers;
+    window.init = function() {
+      var CMD = 8, // bitmask values
+        SHIFT = 4,
+        ALT = 2,
+        CTRL = 1;
+      window.Rotation = false;
+      var gWindow = safari.extension.globalPage.contentWindow;
+      if (!gWindow || !gWindow.init) {
+        setTimeout(init, 1000);
+        return;
+      }
+      if (!gWindow.initialized) {
+        if (gWindow.init() == -1) {
+          setTimeout(init, 1000);
+          return;
+        }
+      }
+      var tabsDiv = document.getElementById('Tabs');
+
+      function modifierCode(event) {
+        switch (event.keyCode) {
+          case 91:
+          case 93:
+            return CMD;
+          case 16:
+            return SHIFT;
+          case 18:
+            return ALT;
+          case 17:
+            return CTRL;
+          default:
+            return 0;
+        }
+      }
+
+      window.addEventListener('keydown', function(event) {
+        var modifier = modifierCode(event);
+        if (modifier !== 0) {
+          modifiers = modifiers | modifier; // add to the bitmask "stack"
+        } else {
+          if ((modifiers & ALT) === ALT || (modifiers & (ALT | SHIFT)) === (ALT | SHIFT)) {
+            if (event.keyIdentifier === 'U+0009') {
+              Rotation = true;
+              if ((modifiers & (ALT | SHIFT)) === (ALT | SHIFT)) {
+                gWindow.fInterceptMessage({
+                  name: "RotateTabs",
+                  message: {
+                    Direction: true,
+                    Modifiers: modifiers
+                  }
+                });
+              } else if ((modifiers & ALT) === ALT) {
+                gWindow.fInterceptMessage({
+                  name: "RotateTabs",
+                  message: {
+                    Direction: false,
+                    Modifiers: modifiers
+                  }
+                });
+              }
+              // for testing
+              event.preventDefault();
+              event.stopPropagation();
             }
-            .tab{
-                font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-                font-size: 13px;
-                background-color: rgba(198, 198, 220, 0.7);
-                border: 1px solid #EEF;
-                border-bottom-width:2px;
-                border-radius:3px;
-                padding: 2px;
-                padding-left:4px;
+          }
+        }
+      }, true);
+
+      window.addEventListener('keyup', function(event) {
+        modifiers = modifiers & ~modifierCode(event); // remove from the stack
+        if (event.keyCode === 18 && Rotation) {
+          Rotation = false;
+          gWindow.fInterceptMessage({
+            name: "ActivateRecent",
+            message: {
+              Direction: false,
+              Modifiers: modifiers
             }
-            .tab:hover{
-                cursor: pointer;
-                background-color: rgba(178, 178, 198, 0.8);
+          });
+        }
+      }, true);
+
+      window.ActivateTab = function(e) {
+        if (event.target.classList.contains('tab')) {
+          for (var i in tabsDiv.children) {
+            if (tabsDiv.children[i] === event.target) break;
+          }
+          tabsDiv.children[gWindow.CurrentIndex].classList.remove('active');
+          gWindow.CurrentIndex = i;
+          tabsDiv.children[i].classList.add("active");
+          gWindow.fInterceptMessage({
+            name: "ActivateRecent",
+            message: {
+              Direction: false,
+              Modifiers: modifiers
             }
-            .tab.active{
-                background-color: rgba(138, 138, 168, 0.9);
-            }
-        </style>
-    </head>
-    <body onload="init();">
-        <div id="Tabs" onmouseup="ActivateTab();"></div>
-    </body>
+          });
+        }
+      }
+
+    };
+  </script>
+  <style type="text/css">
+    body,
+    html {
+      margin: 1px;
+    }
+
+    .tab {
+      font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+      font-size: 13px;
+      background-color: rgba(198, 198, 220, 0.7);
+      border: 1px solid #EEF;
+      border-bottom-width: 2px;
+      border-radius: 3px;
+      padding: 2px;
+      padding-left: 4px;
+    }
+
+    .tab:hover {
+      cursor: pointer;
+      background-color: rgba(178, 178, 198, 0.8);
+    }
+
+    .tab.active {
+      background-color: rgba(138, 138, 168, 0.9);
+    }
+
+    /* Bright skin */
+    .brightSkin .tab {
+      font-weight: 300;
+      letter-spacing: 0.016em;
+      font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px -6px #222;
+      margin-bottom: 3px;
+      border: 0px;
+      border-bottom-width: 0px;
+    }
+
+    .brightSkin .tab:hover {
+      cursor: pointer;
+      background-color: #aaaaff;
+    }
+
+    .brightSkin .tab.active {
+      background-color: rgb(32, 41, 113);
+      color: white;
+    }
+  </style>
+</head>
+
+<body onload="init();">
+  <div id="Tabs" class="brightSkin" onmouseup="ActivateTab();"></div>
+</body>
+
 </html>
