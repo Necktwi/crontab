@@ -1,242 +1,303 @@
 <html>
-    <head>
-        <title>Global</title>
-        <script type="text/javascript">
-            var TabStack=[];
-            var CurrentIndex=0;
-            var PopoverDelay=parseInt(safari.extension.settings.popoverDelay);
-            var Skin=parseInt(safari.extension.settings.skin)
-            var easiness = 100;
-            var titleLen = 70;
-            var TabsDiv;
-            window.init = function(){
-                var CMD   = 8, // bitmask values
-                SHIFT = 4,
-                ALT   = 2,
-                CTRL  = 1;
-                debugger;
-                var TabsButton = safari.extension.toolbarItems[0];
-                if(!TabsButton)return -1;
-                var TabsPopOver = TabsButton.popover;
-                var PopDoc= TabsPopOver.contentWindow.document;
-                TabsDiv= PopDoc.getElementById("Tabs");
-                var RotateTabs=false;
-                function performCommand(event){
-                    if (event.command === "RecentTab") {
-                        if(TabStack.length===0){
-                            addTabsToStack();
-                        }
-                        TabsDiv.children[CurrentIndex].classList.remove('active');
-                        CurrentIndex++;
-                        TabsDiv.children[CurrentIndex].classList.add('active');
-                        ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
-                        window.fInterceptMessage({
-                            name:"ActivateRecent"
-                        });
-                    }
-                }
-                function validateCommand(event){
-                    if (event.command === "reload-page") {
-                        // Disable the button if there is no URL loaded in the tab.
-                        event.target.disabled = !event.target.browserWindow.activeTab.url;
-                    }
-                }
-                function addTabToStack(e){
-                    if (e.target instanceof SafariBrowserTab)
-                    {
-                        if(e.type=="open" && e.target == safari.application.browserWindows[safari.application.browserWindows.length-1].tabs[0]){
-                            safari.application.browserWindows[safari.application.browserWindows.length-1]["cronTabButton"]=safari.extension.toolbarItems[safari.extension.toolbarItems.length-1];
-                        }
-                        if(addTabsToStack())return;
-                        TabStack.push(e.target);
-                        var tabDiv=PopDoc.createElement('div');
-                        tabDiv.className="tab";
-                        if(!e.target.title)
-                            tabDiv.innerText="New tab";
+   <head>
+      <title>Global</title>
+      <script type="text/javascript">
+         var TabStack=[];
+         var CurrentIndex=0;
+         var PopoverDelay=parseInt(safari.extension.settings.popoverDelay);
+         var Skin=parseInt(safari.extension.settings.skin)
+         var easiness = 100;
+         var titleLen = 70;
+         var TabsDiv;
+         var IsMouseOnPopover = false;
+         var init = function() {
+            var TabsButton = safari.extension.toolbarItems[0];
+            if (!TabsButton) return -1;
+            
+            var TabsPopover = TabsButton.popover;
+            var PopDoc =      TabsPopover.contentWindow.document;
+            TabsDiv =         PopDoc.getElementById("Tabs");
+            TabsDiv.addEventListener("mousein", function () {
+               IsMouseOnPopover = true;
+            })
+            
+            var RotateTabs=false;
+            function performCommand (event) {
+               if (event.command === "RecentTab") {
+                  if(TabStack.length===0){
+                     addTabsToStack();
+                  }
+                  TabsDiv.children[CurrentIndex].classList.remove('Active');
+                  CurrentIndex++;
+                  TabsDiv.children[CurrentIndex].classList.add('Active');
+                  ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
+                  window.intercept_message({
+                     name: "ActivateRecent"
+                  });
+               }
+            }
+            function validateCommand (event) {
+               if (event.command === "reload-page") {
+                  // Disable the button if there is no URL loaded in the tab.
+                  event.target.disabled = !event.target.browserWindow.activeTab.
+                  url;
+               }
+            }
+            function peek_into_tab (i) {
+               if (TabStack[i].browserWindow === undefined) {
+                  debugger;
+                  console.log("error");
+               }
+               TabStack[i].browserWindow.activate();
+               TabStack[i].activate();
+               if (TabStack[i].browserWindow.cronTabButton === undefined) {
+                  debugger;
+                  console.log("error");
+               }
+               TabStack[i].browserWindow.cronTabButton.showPopover();
+            }
+            function addTabToStack(e) {
+               if (e.target instanceof SafariBrowserTab) {
+                  if (e.type=="open" && e.target == safari.application.
+                     browserWindows
+                     [safari.application.browserWindows.length-1].tabs[0]
+                  ) {
+                     safari.application.browserWindows[safari.application.
+                     browserWindows.length-1]["cronTabButton"] = 
+                     safari.extension.toolbarItems [
+                        safari.extension.toolbarItems.length-1
+                     ];
+                  }
+                  if(addTabsToStack())return;
+                  TabStack.push(e.target);
+                  var tabDiv = TabsPopover.contentWindow.make_tab_div();
+                  if(!e.target.title) {
+                     tabDiv.innerText = "New tab";
+                  } else {
+                     tabDiv.innerText = e.target.title.length <= titleLen ?
+                     e.target.title : (e.target.substr(0, titleLen) + "...");
+                  }
+                  TabsDiv.insertAdjacentElement('afterbegin', tabDiv);
+               }
+            }
+            function removeTabFromStack (e) {
+               if (e.target instanceof SafariBrowserTab) {
+                  for(var i=0;i<TabStack.length;i++){
+                     if(TabStack[i]==e.target){
+                        TabsDiv.removeChild (
+                           TabsDiv.children[TabStack.length-i-1]
+                        );
+                        TabStack.splice(i,1);
+                        i--;
+                        break;
+                     }
+                  }
+               }
+            }
+            function bringTabToFront (e) {
+               if (e.target instanceof SafariBrowserTab) {
+                  if (!TabStack.length) {
+                     addTabsToStack();
+                  }
+                  var tabDiv;
+                  for(var i=0; i<TabStack.length; i++) {
+                     if(TabStack[i] == e.target) {
+                        tabDiv = TabsDiv.removeChild (
+                           TabsDiv.children[TabStack.length-i-1]
+                        );
+                        TabStack.splice(i,1);
+                        i--;
+                        break;
+                     }
+                  }
+                  if (!tabDiv) {
+                     addTabToStack(e);
+                     TabsDiv.children[0].classList.add('Active');
+                     ScrollEasyIntoView(TabsDiv.children[0]);
+                  } else {
+                     if(TabsDiv.children.length)
+                        TabsDiv.children[0].classList.remove('Active');
+                     tabDiv.classList.add('Active');
+                     ScrollEasyIntoView(tabDiv);
+                     TabStack.push(e.target);
+                     TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
+                     if(e.target.title && (tabDiv.innerText === 'New tab'
+                        || tabDiv.innerText === 'Untitled')
+                     ) {
+                        tabDiv.innerText = e.target.title.length <= titleLen ?
+                        e.target.title : (e.target.title.substr(0,titleLen - 3) 
+                        + "...");
+                     }
+                  }
+               }
+            }
+            function addTabsToStack () {
+               if (!TabStack.length) {
+                  for (var i in safari.application.browserWindows) {
+                     for (var j in safari.application.browserWindows[i].tabs) {
+                        TabStack.push(safari.application.browserWindows[i].
+                        tabs[j]);
+                        var tabDiv = TabsPopover.contentWindow.make_tab_div();
+                        if(!TabStack[TabStack.length-1].title)
+                           tabDiv.innerText= 'New tab';
                         else
-                            tabDiv.innerText=e.target.title.length<=titleLen?e.target.title:(e.target.substr(0,titleLen)+"...");
-                        TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
-                    }
-                }
-                function removeTabFromStack(e){
-                    if (e.target instanceof SafariBrowserTab)
-                    {
-                        for(var i=0;i<TabStack.length;i++){
-                            if(TabStack[i]==e.target){
-                                TabsDiv.removeChild(TabsDiv.children[TabStack.length-i-1]);
-                                TabStack.splice(i,1);
-                                i--;
-                                break;
-                            }
-                        }
-                    }
-                }
-                function bringTabToFront(e){
-                    if (e.target instanceof SafariBrowserTab)
-                    {
-                        if(!TabStack.length){
-                            addTabsToStack();
-                        }
-                        var tabDiv;
-                        for(var i=0;i<TabStack.length;i++){
-                            if(TabStack[i]==e.target){
-                                tabDiv=TabsDiv.removeChild(TabsDiv.children[TabStack.length-i-1]);
-                                TabStack.splice(i,1);
-                                i--;
-                                break;
-                            }
-                        }
-                        if(!tabDiv){
-                            addTabToStack(e);
-                            TabsDiv.children[0].classList.add('active');
-                            ScrollEasyIntoView(TabsDiv.children[0]);
-                        }else{
-                            if(TabsDiv.children.length)
-                                TabsDiv.children[0].classList.remove('active');
-                            tabDiv.classList.add('active');
-                            ScrollEasyIntoView(tabDiv);
-                            TabStack.push(e.target);
-                            TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
-                            if(e.target.title && (tabDiv.innerText==='New tab' || tabDiv.innerText==='Untitled'))
-                                tabDiv.innerText=e.target.title.length<=titleLen?e.target.title:(e.target.title.substr(0,titleLen - 3)+"...");
-                        }
-                    }
-                }
-                function addTabsToStack(){
-                    if(!TabStack.length){
-                        for(var i in safari.application.browserWindows){
-                            for(var j in safari.application.browserWindows[i].tabs){
-                                TabStack.push(safari.application.browserWindows[i].tabs[j]);
-                                var tabDiv=PopDoc.createElement('div');
-                                tabDiv.className="tab";
-                                if(!TabStack[TabStack.length-1].title)
-                                    tabDiv.innerText= 'New tab';
-                                else
-                                    tabDiv.innerText=TabStack[TabStack.length-1].title.length<=titleLen?TabStack[TabStack.length-1].title:(TabStack[TabStack.length-1].title.substr(0,titleLen - 3)+"...");
-                                TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
-                            }
-                        }
-                        return true;
-                    }
-                }
-                window.fInterceptMessage=function(e){
-                    if(TabStack.length===0){
-                        addTabsToStack();
-                    }
-                    if(e.name==="RotateTabs"){
-                        RotateTabs=true;
-                        setTimeout(showPopover, window.PopoverDelay);
-                        TabsDiv.children[CurrentIndex].classList.remove('active');
-                        if(e.message.Direction===false){
-                            CurrentIndex++;
-                            CurrentIndex%=TabsDiv.children.length;
-                        }
-                        else{
-                            CurrentIndex--;
-                            if(CurrentIndex<0)CurrentIndex+=TabsDiv.children.length;
-                        }
+                           tabDiv.innerText = TabStack[TabStack.length-1].
+                           title.length <= titleLen ? TabStack[TabStack.length -
+                           1].title : (TabStack[TabStack.length-1].title.substr(
+                           0,titleLen - 3) + "...");
+                        TabsDiv.insertAdjacentElement('afterbegin', tabDiv);
+                     }
+                  }
+                  return true;
+               }
+            }
+            window.intercept_message = function (e) {
+               if (TabStack.length === 0) {
+                  addTabsToStack();
+               }
+               console.log("message received " + e.name);
+               if (e.name === "RotateTabs") {
+                  if (!safari.application.activeBrowserWindow.cronTabButton) {
+                     for (var i = 0;
+                        i < safari.application.browserWindows.length; i++
+                     ) {
+                        safari.application.browserWindows[i]["cronTabButton"] =
+                        safari.extension.toolbarItems[i];
+                     }
+                  }
+                  RotateTabs = true;
+                  setTimeout(showPopover, window.PopoverDelay);
+                  TabsDiv.children[CurrentIndex].classList.remove('Active');
+                  if (e.message.Direction === false) {
+                     CurrentIndex++;
+                     CurrentIndex %= TabsDiv.children.length;
+                  } else {
+                     CurrentIndex--;
+                     if(CurrentIndex<0)
+                        CurrentIndex += TabsDiv.children.length;
+                  }
+                  TabsDiv.children[CurrentIndex].classList.add('Active');
+                  ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
+                  peek_into_tab(CurrentIndex);
+               } else if (e.name === "ActivateRecent") {
+                  RotateTabs=false;
+                  TabsPopover.hide();
+                  if(CurrentIndex<0){
+                     CurrentIndex = - CurrentIndex;
+                     CurrentIndex %= TabStack.length;
+                  }
+                  else {
+                     CurrentIndex %= TabStack.length;
+                     CurrentIndex = TabStack.length - CurrentIndex - 1;
+                  }
+                  var CurrentTab = TabStack[CurrentIndex];
+                  TabStack.splice(CurrentIndex,1);
+                  TabStack.push(CurrentTab);
+                  var tabDiv = TabsDiv.removeChild (
+                     TabsDiv.children[TabStack.length - CurrentIndex - 1]
+                  );
+                  TabsDiv.insertAdjacentElement('afterbegin', tabDiv);
+                  TabStack[TabStack.length-1].browserWindow.activate();
+                  TabStack[TabStack.length-1].activate();
+                  IsMouseOnPopover = false;
+                  CurrentIndex=0;
+               }
+            }
+            function setTabNameToQuery(e){
+               TabsDiv.children[0].innerText=e.query;
+            }
+            function setTabNameToTitle(e){
+               if(e.target===TabStack[TabStack.length-1]){
+                  if(e.target.title){
+                     TabsDiv.children[0].innerText = e.target.title.length <=
+                     titleLen ? e.target.title : (e.target.title.substr(0, 
+                     titleLen - 3) + "...");
+                  } else {
+                     TabsDiv.children[0].innerText = 'New tab';
+                  }
+               }
+            }
+            function popoverPopping (e) {
+               if (!TabStack.length) {
+                  addTabsToStack();
+               }
+               var activeTabs = TabsDiv.getElementsByClassName('Active');
+               for (var i = 1; i < activeTabs.length; ++i) {
+                  activeTabs[i].classList.remove('Active');
+                  --i;
+               }
+            }
+            function showPopover () {
+               if (RotateTabs) {
+                  var TabsPopover = 
+                  safari.application.activeBrowserWindow.cronTabButton.popover;
+                  TabsPopover.contentWindow.Rotation = true;
+                  for (var i = 0;
+                     i < safari.application.browserWindows.length; i++
+                  ) {
+                     safari.application.browserWindows[i].cronTabButton.
+                     showPopover()
+                  }
+               }
+            }
+            function PreferenceChanged (event) {
+               if (event.key === "popoverDelay") {
+                  PopoverDelay = parseInt(event.newValue);
+               } else if(event.key === "skin") {
+                  var skins = TabsDiv.classList;
+                  console.log(skins);
+                  for (var i=0; i < skins.length; i++){
+                     var skin = skins[i];
+                     console.log(skin);
+                     if(/.+Skin$/.test(skin)){
+                        skins.remove(skin);
+                        --i;
+                     }
+                  }
+                  Skin = event.newValue;
+                  TabsDiv.classList.add(Skin+"Skin");
+               }
+            }
+            function ScrollEasyIntoView (elm) {
+               var wndo=TabsPopover.contentWindow;
+               var elmDispTop = elm.offsetTop - wndo.document.body.scrollTop;
+               if ((elmDispTop + elm.offsetHeight) > wndo.innerHeight) {
+                  wndo.document.body.scrollTop = elm.offsetTop -
+                  wndo.innerHeight + easiness;
+               } else if (elmDispTop <= 0) {
+                  wndo.document.body.scrollTop = (elm.offsetTop <= easiness)?
+                  0 : (elm.offsetTop - easiness + elm.offsetHeight);
+               }
+            }
+            safari.application.addEventListener(
+               "command", performCommand, false
+            );
+            safari.application.addEventListener(
+               "validate", validateCommand, false
+            );
+            safari.application.addEventListener("open", addTabToStack, true);
+            safari.application.addEventListener(
+               "activate", bringTabToFront, true
+            );
+            safari.application.addEventListener(
+               "close", removeTabFromStack, true
+            );
+            safari.application.addEventListener("message", intercept_message,
+               false);
+            //safari.application.addEventListener(
+            // "beforeSearch", setTabNameToQuery, false);
+            safari.application.addEventListener(
+               "beforeNavigate",setTabNameToTitle, false);
+            safari.application.addEventListener("navigate", setTabNameToTitle,
+               false);
+            safari.application.addEventListener("popover", popoverPopping,
+               false);
+            safari.extension.settings.addEventListener("change",
+               PreferenceChanged, false);
+            window.initialized = true;
+         };
 
-                        TabsDiv.children[CurrentIndex].classList.add('active');
-                        ScrollEasyIntoView(TabsDiv.children[CurrentIndex]);
-                    }
-                    else if(e.name==="ActivateRecent"){
-                        RotateTabs=false;
-                        TabsPopOver.hide();
-                        if(CurrentIndex<0){
-                            CurrentIndex = -CurrentIndex;
-                            CurrentIndex %= TabStack.length;
-                        }
-                        else {
-                            CurrentIndex %= TabStack.length;
-                            CurrentIndex = TabStack.length - CurrentIndex-1;
-                        }
-                        var CurrentTab=TabStack[CurrentIndex];
-                        TabStack.splice(CurrentIndex,1);
-                        TabStack.push(CurrentTab);
-                        var tabDiv = TabsDiv.removeChild(TabsDiv.children[TabStack.length-CurrentIndex-1]);
-                        TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
-                        TabStack[TabStack.length-1].browserWindow.activate();
-                        TabStack[TabStack.length-1].activate();
-                        CurrentIndex=0;
-                    }
-                }
-                function setTabNameToQuery(e){
-                    TabsDiv.children[0].innerText=e.query;
-                }
-                function setTabNameToTitle(e){
-                    if(e.target===TabStack[TabStack.length-1]){
-                        if(e.target.title){
-                            TabsDiv.children[0].innerText=e.target.title.length<=titleLen?e.target.title:(e.target.title.substr(0,titleLen - 3)+"...");
-                        } else {
-                            TabsDiv.children[0].innerText='New tab';
-                        }
-                    }
-                }
-                function popoverPopping(e){
-                    if(!TabStack.length){
-                        addTabsToStack();
-                    }
-                    var activeTabs = TabsDiv.getElementsByClassName('active');
-                    for(var i=1;i<activeTabs.length;i++){
-                      activeTabs[i].classList.remove('active');
-                      --i;
-                    }
-                }
-                function showPopover(){
-                    if(RotateTabs){
-                        if(!safari.application.activeBrowserWindow.cronTabButton){
-                            for (var i=0;i<safari.application.browserWindows.length;i++){
-                                safari.application.browserWindows[i]["cronTabButton"]=safari.extension.toolbarItems[i];
-                            }
-                        }
-                        var TabsPopOver = safari.application.activeBrowserWindow.cronTabButton.popover;
-                        TabsPopOver.contentWindow.modifiers|=ALT;
-                        TabsPopOver.contentWindow.Rotation=true;
-                        safari.application.activeBrowserWindow.cronTabButton.showPopover();
-                    }
-                }
-                function PreferenceChanged(event) {
-                    if(event.key=="popoverDelay"){
-                      PopoverDelay=parseInt(event.newValue);
-                    }else if(event.key=="skin"){
-                      var skins = TabsDiv.classList;
-                      console.log(skins);
-                      for (var i=0; i<skins.length; i++){
-                        var skin=skins[i];
-                        console.log(skin);
-                        if(/.+Skin$/.test(skin)){
-                          skins.remove(skin);
-                          --i;
-                        }
-                      }
-                      Skin = event.newValue;
-                      TabsDiv.classList.add(Skin+"Skin");
-                    }
-                }
-                function ScrollEasyIntoView(elm){
-                    var wndo=TabsPopOver.contentWindow
-                    var elmDispTop = elm.offsetTop - wndo.document.body.scrollTop;
-                    	if((elmDispTop+elm.offsetHeight)>wndo.innerHeight){
-                        wndo.document.body.scrollTop= elm.offsetTop - wndo.innerHeight + easiness;
-                    }else if(elmDispTop<=0){
-                        wndo.document.body.scrollTop= (elm.offsetTop <= easiness)?0:(elm.offsetTop - easiness+ elm.offsetHeight);
-                    }
-                }
-                safari.application.addEventListener("command", performCommand, false);
-                safari.application.addEventListener("validate", validateCommand, false);
-                safari.application.addEventListener("open", addTabToStack, true);
-                safari.application.addEventListener("activate", bringTabToFront, true);
-                safari.application.addEventListener("close", removeTabFromStack, true);
-                safari.application.addEventListener("message", fInterceptMessage, false);
-                //safari.application.addEventListener("beforeSearch",setTabNameToQuery, false);
-                safari.application.addEventListener("beforeNavigate",setTabNameToTitle, false);
-                safari.application.addEventListener("navigate",setTabNameToTitle, false);
-                safari.application.addEventListener("popover", popoverPopping, false);
-                safari.extension.settings.addEventListener("change", PreferenceChanged, false);
-                window.initialized=true;
-            };
-
-        </script>
-    </head>
-    <body onload=""></body>
+      </script>
+   </head>
+   <body onload=""></body>
 </html>

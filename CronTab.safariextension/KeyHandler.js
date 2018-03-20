@@ -1,57 +1,87 @@
-var CMD   = 8, // bitmask values
-    SHIFT = 4,
-    ALT   = 2,
-    CTRL  = 1;
-var Rotation = false;
+var Rotation =    false;
+var Modifiers =   0b0000;
+var Ctrl =        0b0001,
+Alt =             0b0010,
+Meta =            0b0100,
+Shift =           0b1000;
+
 (function() {
-    var modifiers = 0;
-    function modifierCode(event) {
-        switch (event.keyCode) {
-            case 91:
-            case 93:
-                return CMD;
-            case 16:
-                return SHIFT;
-            case 18:
-                modifiers=0;
-                return ALT;
-            case 17:
-                return CTRL;
-            default:
-                return 0;
-        }
-    }
-    function keydownHandler(event){
-        var modifier = modifierCode(event);
-        if (modifier !== 0) {
-            modifiers = modifiers | modifier; // add to the bitmask "stack"
-        } else {
-            if((modifiers&ALT)===ALT || (modifiers&(ALT|SHIFT))===(ALT|SHIFT)){
-                if (event.keyIdentifier === 'U+0009') {
-                    Rotation=true;
-                    if((modifiers&(ALT|SHIFT))===(ALT|SHIFT)){
-                        safari.self.tab.dispatchMessage("RotateTabs",{Direction:true,Modifiers:modifiers});
-                    }
-                    else if((modifiers&ALT)===ALT ){
-                        safari.self.tab.dispatchMessage("RotateTabs",{Direction:false,Modifiers:modifiers});
-                    }
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+   function update_Modifiers (event) {
+      Modifiers = 
+      ((event.getModifierState('Control') | event.ctrlKey) ?   Ctrl :   0)|
+      ((event.getModifierState('Alt') | event.altKey) ?        Alt :    0)|
+      ((event.getModifierState('Meta') | event.metaKey) ?      Meta :   0)|
+      ((event.getModifierState('Shift') | event.shiftKey) ?    Shift :  0);
+      console.log(Number(Modifiers).toString(2));
+   }
+   function handle_key_down (event) {
+      update_Modifiers(event);
+      if(event.key === 'Tab') {
+         if (Modifiers === Alt) {
+            Rotation = true;
+            if (safari.self.tab) {
+               safari.self.tab.dispatchMessage (
+                  "RotateTabs", {Direction: false}
+               );
+            } else if (safari.extension) {
+               safari.extension.globalPage.contentWindow.intercept_message({
+                  name: "RotateTabs",
+                  message: {
+                    Direction: false
+                  }
+               });
             }
-        }
-    }
-    function keyupHandler(event){
-        modifiers = modifiers & ~modifierCode(event); // remove from the stack
-        if(event.keyCode===18 &&Rotation){
-            Rotation=false;
-            safari.self.tab.dispatchMessage("ActivateRecent",{Direction:false,Modifiers:modifiers});
-        }
-    }
-    function windowBlurHandler(e){
-        modifiers = 0;
-    }
-    window.addEventListener('keydown', keydownHandler , true);
-    window.addEventListener('keyup', keyupHandler, true);
-    window.addEventListener('blur', windowBlurHandler,false);
+            event.preventDefault();
+            event.stopPropagation();
+         }
+      } else if (event.key === '`') {
+         if (Modifiers === Alt) {
+            Rotation = true;
+            if (safari.self.tab) {
+               safari.self.tab.dispatchMessage (
+                  "RotateTabs", {Direction: true}
+               );
+            } else if (safari.extension) {
+               safari.extension.globalPage.contentWindow.intercept_message({
+                  name: "RotateTabs",
+                  message: {
+                    Direction: true
+                  }
+               });
+            }
+            event.preventDefault();
+            event.stopPropagation();
+         }
+      }
+   }
+   function handle_key_up (event) {
+      update_Modifiers(event);
+      if (event.key === 'Alt' && Rotation) {
+         Rotation = false;
+         if (safari.self.tab) {
+            safari.self.tab.dispatchMessage("ActivateRecent",
+                {Direction: false}
+            );
+         } else if (safari.extension) {
+            safari.extension.globalPage.contentWindow.intercept_message({
+               name: "ActivateRecent",
+               message: {
+                 Direction: false
+               }
+            });
+         }
+      }
+   }
+   function handle_window_blur (e) {
+      Modifiers = 0;
+   }
+   function handle_message (e) {
+      if (e.name === 'Modifiers') {
+         
+      }
+   }
+   window.addEventListener('keydown', handle_key_down , true);
+   window.addEventListener('keyup', handle_key_up, true);
+   window.addEventListener('blur', handle_window_blur, false);
+   safari.self.addEventListener('message', handle_message, false);
 }());
