@@ -76,6 +76,13 @@
                   } else {
                      tabDiv.innerText = e.target.title.length <= titleLen ?
                      e.target.title : (e.target.substr(0, titleLen) + "...");
+                     if (tabDiv.innerText.search(' ') > NoBrkTitleLen ||
+                        (tabDiv.innerText.search(' ') === -1 &&
+                        tabDiv.innerText.length> NoBrkTitleLen)
+                     ) {
+                        tabDiv.innerText = tabDiv.innerText.
+                        substr(0,NoBrkTitleLen-2) + '...';
+                     }
                   }
                   TabsDiv.insertAdjacentElement('afterbegin', tabDiv);
                }
@@ -127,6 +134,13 @@
                         tabDiv.innerText = e.target.title.length <= titleLen ?
                         e.target.title : (e.target.title.substr(0,titleLen - 3) 
                         + "...");
+                        if (tabDiv.innerText.search(' ') > NoBrkTitleLen ||
+                           (tabDiv.innerText.search(' ') === -1 &&
+                           tabDiv.innerText.length> NoBrkTitleLen)
+                        ) {
+                           tabDiv.innerText = tabDiv.innerText.
+                           substr(0,NoBrkTitleLen-2) + '...';
+                        }
                      }
                   }
                }
@@ -140,11 +154,19 @@
                         var tabDiv = TabsPopover.contentWindow.make_tab_div();
                         if(!TabStack[TabStack.length-1].title)
                            tabDiv.innerText= 'New tab';
-                        else
+                        else {
                            tabDiv.innerText = TabStack[TabStack.length-1].
                            title.length <= titleLen ? TabStack[TabStack.length -
                            1].title : (TabStack[TabStack.length-1].title.substr(
                            0,titleLen - 3) + "...");
+                           if (tabDiv.innerText.search(' ') > NoBrkTitleLen ||
+                              (tabDiv.innerText.search(' ') === -1 &&
+                              tabDiv.innerText.length> NoBrkTitleLen)
+                           ) {
+                              tabDiv.innerText = tabDiv.innerText.
+                              substr(0,NoBrkTitleLen-2) + '...';
+                           }
+                        }
                         TabsDiv.insertAdjacentElement('afterbegin', tabDiv);
                      }
                   }
@@ -212,6 +234,14 @@
                      TabsDiv.children[0].innerText = e.target.title.length <=
                      titleLen ? e.target.title : (e.target.title.substr(0, 
                      titleLen - 3) + "...");
+                     if (TabsDiv.children[0].innerText.search(' ') >
+                        NoBrkTitleLen ||
+                        (TabsDiv.children[0].innerText.search(' ') === -1 &&
+                        TabsDiv.children[0].innerText.length> NoBrkTitleLen)
+                     ) {
+                        TabsDiv.children[0].innerText = TabsDiv.children[0].
+                        innerText.substr(0,NoBrkTitleLen-2) + '...';
+                     }
                   } else {
                      TabsDiv.children[0].innerText = 'New tab';
                   }
