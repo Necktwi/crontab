@@ -8,6 +8,7 @@
             var Skin=parseInt(safari.extension.settings.skin)
             var easiness = 100;
             var titleLen = 70;
+            var NoBrkTitleLen = 32;
             var TabsDiv;
             window.init = function(){
                 var CMD   = 8, // bitmask values
@@ -53,8 +54,12 @@
                         tabDiv.className="tab";
                         if(!e.target.title)
                             tabDiv.innerText="New tab";
-                        else
+                        else {
                             tabDiv.innerText=e.target.title.length<=titleLen?e.target.title:(e.target.substr(0,titleLen)+"...");
+                            if (tabDiv.innerText.search(' ') > NoBrkTitleLen || (tabDiv.innerText.search(' ') === -1 && tabDiv.innerText.length> NoBrkTitleLen)) {
+                                 tabDiv.innerText = tabDiv.innerText.substr(0,NoBrkTitleLen-2) + '...';
+                            }
+                        }
                         TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
                     }
                 }
@@ -99,6 +104,9 @@
                             TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
                             if(e.target.title && (tabDiv.innerText==='New tab' || tabDiv.innerText==='Untitled'))
                                 tabDiv.innerText=e.target.title.length<=titleLen?e.target.title:(e.target.title.substr(0,titleLen - 3)+"...");
+                                if (tabDiv.innerText.search(' ') > NoBrkTitleLen || (tabDiv.innerText.search(' ') === -1 && tabDiv.innerText.length> NoBrkTitleLen)) {
+                                       tabDiv.innerText = tabDiv.innerText.substr(0,NoBrkTitleLen-2) + '...';
+                              }
                         }
                     }
                 }
@@ -111,8 +119,12 @@
                                 tabDiv.className="tab";
                                 if(!TabStack[TabStack.length-1].title)
                                     tabDiv.innerText= 'New tab';
-                                else
+                                else {
                                     tabDiv.innerText=TabStack[TabStack.length-1].title.length<=titleLen?TabStack[TabStack.length-1].title:(TabStack[TabStack.length-1].title.substr(0,titleLen - 3)+"...");
+                                    if (tabDiv.innerText.search(' ') > NoBrkTitleLen || (tabDiv.innerText.search(' ') === -1 && tabDiv.innerText.length> NoBrkTitleLen)) {
+                                 tabDiv.innerText = tabDiv.innerText.substr(0,NoBrkTitleLen-2) + '...';
+                            }
+                                 }
                                 TabsDiv.insertAdjacentElement('afterbegin',tabDiv);
                             }
                         }
@@ -167,6 +179,9 @@
                     if(e.target===TabStack[TabStack.length-1]){
                         if(e.target.title){
                             TabsDiv.children[0].innerText=e.target.title.length<=titleLen?e.target.title:(e.target.title.substr(0,titleLen - 3)+"...");
+                            if (TabsDiv.children[0].innerText.search(' ') > NoBrkTitleLen || (TabsDiv.children[0].innerText.search(' ') === -1 && TabsDiv.children[0].innerText.length> NoBrkTitleLen)) {
+                                 TabsDiv.children[0].innerText = TabsDiv.children[0].innerText.substr(0,NoBrkTitleLen-2) + '...';
+                            }
                         } else {
                             TabsDiv.children[0].innerText='New tab';
                         }
