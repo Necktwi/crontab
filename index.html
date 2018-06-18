@@ -9,9 +9,18 @@
    <link rel='icon' href='img/Icon-64.png' size='64x64'/>
    <link rel='icon' href='img/Icon-96.png' size='96x96'/>
 
-   <meta name="description" content="Safari extension to switch to the recent tab or previous acitve tab. Alt + tab switch to the last visited tab. Pops up list of recently visited tabs."/>
-   <meta name="keywords" content="previous active tab, switch tab, tab, safari extension, switch, crontab, tabstack, recent tab, macos, osx"/>
-   <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+   <meta name="description" content = "
+      Safari extension to switch to the recent tab or previous acitve tab.
+      Alt + tab switch to the last visited tab. Pops up list of recently visited
+      tabs.
+   "/>
+   <meta name="keywords" content = "
+      previous active tab, switch tab, tab, safari 
+      extension, switch, crontab, tabstack, recent tab, macos, osx
+   "/>
+   <meta name="viewport" content = "
+      width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no
+   "/>
    <script type="application/ld+json">
       {
          "@context": "http://schema.org",
@@ -24,177 +33,7 @@
             "@type": "ContactPoint",
             "email": "satyagowtham.k@gmail.com",
             "contactType": "personal"
-            }]
-      }
-   </script>
-   <script type="text/javascript">
-         /*****************************************************************************
-          *                                                         *
-          *  SVG Path Rounding Function                                    *
-          *  Copyright (C) 2014 Yona Appletree                               *
-          *                                                         *
-          *  Licensed under the Apache License, Version 2.0 (the "License");         *
-          *  you may not use this file except in compliance with the License.        *
-          *  You may obtain a copy of the License at                           *
-          *                                                         *
-          *     http://www.apache.org/licenses/LICENSE-2.0                     *
-          *                                                         *
-          *  Unless required by applicable law or agreed to in writing, software      *
-          *  distributed under the License is distributed on an "AS IS" BASIS,       *
-          *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  *
-          *  See the License for the specific language governing permissions and      *
-          *  limitations under the License.                                 *
-          *                                                         *
-          *****************************************************************************/
-
-      /**
-       * SVG Path rounding function. Takes an input path string and outputs a path
-       * string where all line-line corners have been rounded. Only supports absolute
-       * commands at the moment.
-       *
-       * @param pathString The SVG input path
-       * @param radius The amount to round the corners, either a value in the SVG
-       *            coordinate space, or, if useFractionalRadius is true, a value
-       *            from 0 to 1.
-       * @param useFractionalRadius If true, the curve radius is expressed as a
-       *            fraction of the distance between the point being curved and
-       *            the previous and next points.
-       * @returns A new SVG path string with the rounding
-       */
-      function roundPathCorners(pathString, radius, useFractionalRadius) {
-         function moveTowardsLength(movingPoint, targetPoint, amount) {
-            var width = (targetPoint.x - movingPoint.x);
-            var height = (targetPoint.y - movingPoint.y);
-
-            var distance = Math.sqrt(width*width + height*height);
-
-            return moveTowardsFractional(movingPoint, targetPoint, Math.min(1, amount / distance));
-         }
-         function moveTowardsFractional(movingPoint, targetPoint, fraction) {
-            return {
-               x: movingPoint.x + (targetPoint.x - movingPoint.x)*fraction,
-               y: movingPoint.y + (targetPoint.y - movingPoint.y)*fraction
-            };
-         }
-
-         // Adjusts the ending position of a command
-         function adjustCommand(cmd, newPoint) {
-            if (cmd.length > 2) {
-               cmd[cmd.length - 2] = newPoint.x;
-               cmd[cmd.length - 1] = newPoint.y;
-            }
-         }
-
-         // Gives an {x, y} object for a command's ending position
-         function pointForCommand(cmd) {
-            return {
-               x: parseFloat(cmd[cmd.length - 2]),
-               y: parseFloat(cmd[cmd.length - 1]),
-            };
-         }
-
-         // Split apart the path, handing concatonated letters and numbers
-         var pathParts = pathString
-         .split(/[,\s]/)
-         .reduce(function(parts, part){
-            var match = part.match("([a-zA-Z])(.+)");
-            if (match) {
-               parts.push(match[1]);
-               parts.push(match[2]);
-            } else {
-               parts.push(part);
-            }
-
-            return parts;
-         }, []);
-
-         // Group the commands with their arguments for easier handling
-         var commands = pathParts.reduce(function(commands, part) {
-            if (parseFloat(part) == part && commands.length) {
-               commands[commands.length - 1].push(part);
-            } else {
-               commands.push([part]);
-            }
-
-            return commands;
-         }, []);
-
-         // The resulting commands, also grouped
-         var resultCommands = [];
-
-         if (commands.length > 1) {
-            var startPoint = pointForCommand(commands[0]);
-
-            // Handle the close path case with a "virtual" closing line
-            var virtualCloseLine = null;
-            if (commands[commands.length - 1][0] == "Z" && commands[0].length > 2) {
-               virtualCloseLine = ["L", startPoint.x, startPoint.y];
-               commands[commands.length - 1] = virtualCloseLine;
-            }
-
-            // We always use the first command (but it may be mutated)
-            resultCommands.push(commands[0]);
-
-            for (var cmdIndex=1; cmdIndex < commands.length; cmdIndex++) {
-               var prevCmd = resultCommands[resultCommands.length - 1];
-
-               var curCmd = commands[cmdIndex];
-
-               // Handle closing case
-               var nextCmd = (curCmd == virtualCloseLine)
-               ? commands[1]
-               : commands[cmdIndex + 1];
-
-               // Nasty logic to decide if this path is a candidite.
-               if (nextCmd && prevCmd && (prevCmd.length > 2) && curCmd[0] == "L" && nextCmd.length > 2 && nextCmd[0] == "L") {
-                  // Calc the points we're dealing with
-                  var prevPoint = pointForCommand(prevCmd);
-                  var curPoint = pointForCommand(curCmd);
-                  var nextPoint = pointForCommand(nextCmd);
-
-                  // The start and end of the cuve are just our point moved towards the previous and next points, respectivly
-                  var curveStart, curveEnd;
-
-                  if (useFractionalRadius) {
-                     curveStart = moveTowardsFractional(curPoint, prevCmd.origPoint || prevPoint, radius);
-                     curveEnd = moveTowardsFractional(curPoint, nextCmd.origPoint || nextPoint, radius);
-                  } else {
-                     curveStart = moveTowardsLength(curPoint, prevPoint, radius);
-                     curveEnd = moveTowardsLength(curPoint, nextPoint, radius);
-                  }
-
-                  // Adjust the current command and add it
-                  adjustCommand(curCmd, curveStart);
-                  curCmd.origPoint = curPoint;
-                  resultCommands.push(curCmd);
-
-                  // The curve control points are halfway between the start/end of the curve and
-                  // the original point
-                  var startControl = moveTowardsFractional(curveStart, curPoint, .5);
-                  var endControl = moveTowardsFractional(curPoint, curveEnd, .5);
-
-                  // Create the curve
-                  var curveCmd = ["C", startControl.x, startControl.y, endControl.x, endControl.y, curveEnd.x, curveEnd.y];
-                  // Save the original point for fractional calculations
-                  curveCmd.origPoint = curPoint;
-                  resultCommands.push(curveCmd);
-               } else {
-                  // Pass through commands that don't qualify
-                  resultCommands.push(curCmd);
-               }
-            }
-
-            // Fix up the starting point and restore the close path if the path was orignally closed
-            if (virtualCloseLine) {
-               var newStartPoint = pointForCommand(resultCommands[resultCommands.length-1]);
-               resultCommands.push(["Z"]);
-               adjustCommand(resultCommands[0], newStartPoint);
-            }
-         } else {
-            resultCommands = commands;
-         }
-
-         return resultCommands.reduce(function(str, c){ return str + c.join(" ") + " "; }, "");
+         }]
       }
    </script>
    <style type="text/css">
@@ -211,10 +50,12 @@
          min-height: 100%;
          height: auto !important;
          height: 100%;
-         margin: 0 auto -0.5in; /* the bottom margin is the negative value of the footer's height */
+         /*the bottom margin is the negative value of the footer's height*/
+         margin: 0 auto -0.5in; 
       }
       .footer, .push {
-         height: 0.5in; /* .push must be the same height as .footer */
+         /* .push must be the same height as .footer */
+         height: 0.5in; 
       }
       .footer {
          text-align:center;
@@ -243,7 +84,9 @@
          var paths = logo.getSVGDocument().getElementsByTagName('path');
          for(var i=0; i< paths.length;i++){
             var path=paths[i];
-            path.setAttribute('d', roundPathCorners(path.getAttribute('d'), 10, false));
+            path.setAttribute(
+               'd', roundPathCorners(path.getAttribute('d'), 10, false)
+            );
          }
       }
    </script>
@@ -251,44 +94,87 @@
 </head>
 <body onload="">
    <div class="wrapper">
-      <div class="center" style="height:0.2in"></div>
-      <object id = "logo" class="center" data="img/Icon.svg" type="image/svg+xml" style="width:1.5in">
+      <div class="center" style = "height:0.2in"></div>
+      <object id = "logo" class = "center" data = "img/Icon.svg"
+         type = "image/svg+xml" style = "width:1.5in"
+      > 
          <img src="img/Icon.png" />
       </object>
-      <div class="center" style="font-size:.5in; position: relative;">CronTab</div>
-      <a href="CronTab-1.8_9.safariextz" style="display:block;">
-         <img src="img/ExtLinkBG.png" alt="CronTab Safari Extension" style="width:0.8in;"/>
+      <div class="center" style="font-size:.5in; position: relative;">
+         CronTab
+      </div>
+      <a href = "CronTab-1.8_9.safariextz" style = "display:block;">
+         <img src = "img/ExtLinkBG.png" alt = "CronTab Safari Extension"
+            style = "width:0.8in;"
+         />
       </a>
       <div class="center">&nbsp;</div>
       <div class="center">alt+tab</div>
       <div class="center">switch to the previous active tab</div>
-      <div class="center">hold 'alt' a little longer to pop up a list of chronologically active sorted tabs</div>
-      <div class="center">traverse through the list with 'tab' and release the 'alt' to land on the tab</div>
-      <div class="center">exception! If the page don't load then 'alt+tab' won't work.</div>
-      <div class="center">you got to click the toolbar button to switch and force click to pop up the list</div>
+      <div class="center">
+         hold 'alt' a little longer to pop up a list of chronologically active
+         sorted tabs
+      </div>
+      <div class="center">
+         traverse through the list with 'tab' and release the 'alt' to land on 
+         the tab
+      </div>
+      <div class="center">
+         exception! If the page don't load then 'alt+tab' won't work.
+      </div>
+      <div class="center">
+         you got to click the toolbar button to switch and force click to pop up
+         the list
+      </div>
       <div class="center">restart your browser after installation</div>
       <br/>
       <br/>
       <div class="center">
-      <a class="header-logo-invertocat" href="https://github.com/necktwi/crontab" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
-      <svg aria-hidden="true" class="octicon octicon-mark-github" style="height: 0.5in;" version="1.1" viewBox="0 0 16 16" width="28"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+      <a class="header-logo-invertocat" 
+         href= "https://github.com/necktwi/crontab" data-hotkey= "g d" 
+         aria-label = "Homepage"
+         data-ga-click = "Header, go to dashboard, icon:logo"
+      >
+      <svg aria-hidden="true" class="octicon octicon-mark-github" 
+         style="height: 0.5in;" version="1.1" viewBox="0 0 16 16" width="28"
+      >
+         <path fill-rule="evenodd" d = "
+            M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82
+            -1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87
+            2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31
+            -1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32
+            -.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 
+            1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 
+            3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 
+            .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+         </path>
+      </svg>
       </a>
       </div>
       </br>
       <div class="center">
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1301679816548560";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        </script>
-        <div class="fb-like" data-href="https://www.facebook.com/tabschronology/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+         <div id="fb-root"></div>
+         <script>
+            (function(d, s, id) {
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) return;
+               js = d.createElement(s); js.id = id;
+               js.src = "\
+//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=\130167981654856\
+0"             ;
+               fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+         </script>
+         <div class="fb-like"
+            data-href="https://www.facebook.com/tabschronology/"
+            data-layout="button_count" data-action="like"
+            data-size="small" data-show-faces="true" data-share="false"
+         >
+         </div>
       </div>
       <br/>
       <div class="push"></div>
    </div>
-   <div class="footer">©FerryFair</div>
+   <div class="footer">&copy;FerryFair</div>
 </body></html>
